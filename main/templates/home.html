@@ -1,31 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- META -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
 
-    <!-- LINKS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block title %}Home - My Site{% endblock %}
 
-    <!-- Font(s) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-    <title>Eventus | Stark State College</title>
-</head>
-<body>
-    <div class="body-wrapper">
-        <header>
-            <img src="{% static 'images/stark-state-header-2.png' %}" alt="Example Image">
-            <h1>Eventus</h1>
-        </header>
-        <main>
-            <h1>Test</h1>
-        </main>
-    </div>
-
-</body>
-</html>
+{% block content %}
+  <!-- <h1>Welcome to My Site!</h1>
+  <p>This is the home page.</p> -->
+{% endblock %}
