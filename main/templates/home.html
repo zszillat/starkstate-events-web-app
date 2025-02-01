@@ -1,8 +1,105 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home - My Site{% endblock %}
+{% block title %}Spartan Engage{% endblock %}
 
 {% block content %}
-  <!-- <h1>Welcome to My Site!</h1>
-  <p>This is the home page.</p> -->
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <div class="feed">
+
+    <div class="event">
+      <div class="title-box">
+          <img src="{% static 'images/stock-images/stark-state-orchestra-pfp.jpg' %}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">Stark State Orchestra</p>
+            <p class="event-title">Spring Symphony Concert</p>
+          </div>
+      </div>  
+
+      <div class="time"><p>April 15, 2025 4:30pm</p></div>
+      <img src="{% static 'images/stock-images/stark-state-orchestra.jpg' %}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>150 Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+
+
+    <div class="event">
+      <div class="title-box">
+          <img src="{% static 'images/stock-images/comic-book-club.jpg' %}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">Comic Book Club</p>
+            <p class="event-title">Superhero Movie Night</p>
+          </div>
+      </div>  
+
+      <div class="time"><p>March 10, 2025 6:30pm</p></div>
+      <img src="{% static 'images/stock-images/student-header.png' %}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>143 Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+
+
+    <div class="event">
+      <div class="title-box">
+          <img src="{% static 'images/stock-images/robotics-club-pfp.jpg' %}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">Robotics Club</p>
+            <p class="event-title">Battle of the Bots</p>
+          </div>
+      </div>  
+
+      <div class="time"><p>May 5, 2025 10:30pm</p></div>
+      <img src="{% static 'images/stock-images/robotics-club.jpg' %}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>45 Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+
+    
+
+
+    <div class="event">
+      <div class="title-box">
+          <img src="{% static 'images/stock-images/environmental-club-pfp.jpg' %}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">Environmental Club</p>
+            <p class="event-title">Campus Clean-Up Day</p>
+          </div>
+      </div>  
+
+      <div class="time"><p>April 22, 2025 12:00pm</p></div>
+      <img src="{% static 'images/stock-images/environmental-club.jpg' %}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>143 Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+
+
+
+    <div class="event">
+      <div class="title-box">
+          <img src="{% static 'images/stock-images/drama-society-pfp.jpg' %}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">Drama Society</p>
+            <p class="event-title">One-Act Play Festival</p>
+          </div>
+      </div>  
+
+      <div class="time"><p>May 20, 2025 11:00am</p></div>
+      <img src="{% static 'images/stock-images/drama-society-pfp.jpg' %}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>120 Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+
+  </div>
+
+
 {% endblock %}

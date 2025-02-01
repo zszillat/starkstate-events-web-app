@@ -1,14 +1,27 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: aliceblue;
+    background-color: #F2F4F7;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    display: flex;
+
 }
 
-/* Mobile View */
+main {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    padding-top: 20px;
+}
+
+/* Desktop */
 @media (min-width: 1000px) {
-    
 
 }

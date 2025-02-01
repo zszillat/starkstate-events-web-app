@@ -1,13 +1,24 @@
 {% load static %}
-<div class="header-wrapper">
-    <img src="{% static 'images/stark-state-logo.png' %}" alt="Stark State Logo">
-    <div class="header-text-wrapper">
-        <h1>Spartan Engage</h1>
-        <p>Stark State College</p>
+<header>
+    <div class="header-wrapper">
+        <img src="{% static 'images/stark-state-logo.png' %}" alt="Stark State Logo">
+        <div class="header-text-wrapper">
+            <h1>Spartan Engage</h1>
+            <p>Stark State College</p>
+        </div>
     </div>
+
+    <div class="menu">
+        <img src="{% static 'images/hamburger.svg' %}" alt="Menu Icon Button" id="menuToggleButton">
+    </div>
+
+
+</header>
+
+<div class="header-nav" id="mobileMenu">
+    <a href="">Home</a>
+    <a href="">About</a>
+    <a href="">My Account</a>
 </div>
 
-<div class="menu">
-    <img src="{% static 'images/hamburger.svg' %}" alt="Menu Icon">
-</div>
-  
+<script src="{% static 'js/header.js' %}"></script>
