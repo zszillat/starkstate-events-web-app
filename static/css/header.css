@@ -81,3 +81,37 @@ header {
     background-color: #1A2857;
     color: white;
 }
+
+.desktop-nav {
+    display: none;
+}
+
+/* Desktop */
+@media (min-width: 1000px) {
+    .menu {
+        display: none;
+    }
+
+    .desktop-nav {
+        display: flex;
+        width: 400px;
+        height: 100%;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .desktop-nav a {
+        color: rgb(82, 82, 82);
+        text-decoration: none;
+        font-size: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+    }
+    .desktop-nav a:hover {
+        background-color: rgb(240, 240, 240);
+        color: rgb(59, 59, 59);
+
+    }
+}
