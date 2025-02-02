@@ -17,11 +17,9 @@ body {
 main {
     display: flex;
     justify-content: center;
-    max-width: 1000px;
     padding-top: 20px;
 }
 
 /* Desktop */
 @media (min-width: 1000px) {
-
 }
