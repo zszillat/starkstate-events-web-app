@@ -19,3 +19,6 @@ def new(request):
 
 def club(request):
     return render(request, 'club.html')
+
+def clubs(request):
+    return render(request, 'clubs.html')
