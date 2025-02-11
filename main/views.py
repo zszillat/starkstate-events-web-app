@@ -1,9 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.utils.timezone import now
+from django.db.models import Count
+from .models import Event, Club
 
-# Create your views here.
 def homepage(request):
-    return render(request, 'home.html')
+    today = now().date()
+
+    clubs = Club.objects.order_by('name')
+    
+    # Fetch events with related club data and annotate with attendee count
+    events = Event.objects.filter(date__gte=today) \
+        .select_related('club') \
+        .annotate(attendee_count=Count('attendance')) \
+        .order_by('date')
+
+    return render(request, 'home.html', {
+        'events': events,
+        'clubs': clubs
+        })
+
 
 def event(request):
     return render(request, 'event.html')

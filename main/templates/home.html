@@ -9,142 +9,38 @@
   <div class="page-left">
   </div>
   <div class="feed">
-
+    {% for event in events %}
     <div class="event">
       <div class="title-box">
-          <img src="{% static 'images/stock-images/stark-state-orchestra-pfp.jpg' %}" alt="" class="student-org-img">
+          <img src="{{ event.club.pfp.url }}" alt="" class="student-org-img">
           <div class="event-title-wrapper">
-            <p class="club-title">Stark State Orchestra</p>
-            <p class="event-title">Spring Symphony Concert</p>
+            <p class="club-title">{{ event.club.name }}</p>
+            <p class="event-title">{{ event.name }}</p>
           </div>
       </div>  
 
-      <div class="time"><p>April 15, 2025 4:30pm</p></div>
-      <img src="{% static 'images/stock-images/stark-state-orchestra.jpg' %}" alt="" class="post-img">
+      <div class="time"><p>{{ event.date }} {{ event.time }}</p></div>
+      <img src="{{ event.image.url }}" alt="" class="post-img">
       <div class="more-details-section">
-        <p>150 Attending</p>
+        <p>{{ event.attendee_count }} Attending</p>
         <button>More Details</button>
       </div>
     </div>
-
-
-    <div class="event">
-      <div class="title-box">
-          <img src="{% static 'images/stock-images/comic-book-club.jpg' %}" alt="" class="student-org-img">
-          <div class="event-title-wrapper">
-            <p class="club-title">Comic Book Club</p>
-            <p class="event-title">Superhero Movie Night</p>
-          </div>
-      </div>  
-
-      <div class="time"><p>March 10, 2025 6:30pm</p></div>
-      <img src="{% static 'images/stock-images/student-header.png' %}" alt="" class="post-img">
-      <div class="more-details-section">
-        <p>143 Attending</p>
-        <button>More Details</button>
-      </div>
-    </div>
-
-
-    <div class="event">
-      <div class="title-box">
-          <img src="{% static 'images/stock-images/robotics-club-pfp.jpg' %}" alt="" class="student-org-img">
-          <div class="event-title-wrapper">
-            <p class="club-title">Robotics Club</p>
-            <p class="event-title">Battle of the Bots</p>
-          </div>
-      </div>  
-
-      <div class="time"><p>May 5, 2025 10:30pm</p></div>
-      <img src="{% static 'images/stock-images/robotics-club.jpg' %}" alt="" class="post-img">
-      <div class="more-details-section">
-        <p>45 Attending</p>
-        <button>More Details</button>
-      </div>
-    </div>
-
-    
-
-
-    <div class="event">
-      <div class="title-box">
-          <img src="{% static 'images/stock-images/environmental-club-pfp.jpg' %}" alt="" class="student-org-img">
-          <div class="event-title-wrapper">
-            <p class="club-title">Environmental Club</p>
-            <p class="event-title">Campus Clean-Up Day</p>
-          </div>
-      </div>  
-
-      <div class="time"><p>April 22, 2025 12:00pm</p></div>
-      <img src="{% static 'images/stock-images/environmental-club.jpg' %}" alt="" class="post-img">
-      <div class="more-details-section">
-        <p>143 Attending</p>
-        <button>More Details</button>
-      </div>
-    </div>
-
-
-
-    <div class="event">
-      <div class="title-box">
-          <img src="{% static 'images/stock-images/drama-society-pfp.jpg' %}" alt="" class="student-org-img">
-          <div class="event-title-wrapper">
-            <p class="club-title">Drama Society</p>
-            <p class="event-title">One-Act Play Festival</p>
-          </div>
-      </div>  
-
-      <div class="time"><p>May 20, 2025 11:00am</p></div>
-      <img src="{% static 'images/stock-images/drama-society-pfp.jpg' %}" alt="" class="post-img">
-      <div class="more-details-section">
-        <p>120 Attending</p>
-        <button>More Details</button>
-      </div>
-    </div>
-
+    {% empty %}
+    <p>No upcoming events.</p>
+    {% endfor %}
   </div>
+
 
   <div class="page-right">
     <div class="clubs">
       <h1>Student Organizations</h1>
       <div class="club-list">
-        <a href="/student-organization/amateur-radio-society">Amateur Radio Society</a>
-        <a href="/student-organization/amlt">Association for Medical Laboratory Technicians (AMLT)</a>
-        <a href="/student-organization/tri-beta">Beta Beta Beta (Tri Beta) Biological Honor Society</a>
-        <a href="/student-organization/between-the-covers">Between the Covers Book Club</a>
-        <a href="/student-organization/chemistry-club">Chemistry Club (Stark State College Student Chapter of the American Chemical Society)</a>
-        <a href="/student-organization/comic-book-club">Comic Book Club</a>
-        <a href="/student-organization/cjsa">Criminal Justice Student Association</a>
-        <a href="/student-organization/cru">CRU (Campus Crusade for Christ)</a>
-        <a href="/student-organization/culinary-club">Culinary Club (Epicurean Society)</a>
-        <a href="/student-organization/education-club">Education Club</a>
-        <a href="/student-organization/htcia">High Technology Crime Investigation Association (HTCIA)</a>
-        <a href="/student-organization/hsssa">Human and Social Services Student Association</a>
-        <a href="/student-organization/ieee">Institute of Electrical and Electronic Engineers (IEEE)</a>
-        <a href="/student-organization/ima">Institute of Management Accountants (IMA)</a>
-        <a href="/student-organization/math-club">Math Club</a>
-        <a href="/student-organization/naba">National Association of Black Accountants & Black Business Leaders (NABA)</a>
-        <a href="/student-organization/neca">National Electrical Contractors Association (NECA)</a>
-        <a href="/student-organization/outdoor-adventure">Outdoor Adventure Club</a>
-        <a href="/student-organization/phi-theta-kappa">Phi Theta Kappa Honor Society</a>
-        <a href="/student-organization/physics-astronomy">Physics and Astronomy Club</a>
-        <a href="/student-organization/psi-beta">Psi Beta Psychology Honors Chapter</a>
-        <a href="/student-organization/respiratory-therapy">Respiratory Therapy Club</a>
-        <a href="/student-organization/software-dev-guild">Software Development Guild</a>
-        <a href="/student-organization/spartans-robotics">Spartans Robotic Club</a>
-        <a href="/student-organization/stark-communication">Stark Communication Society</a>
-        <a href="/student-organization/stark-raving-writers">Stark Raving Writers</a>
-        <a href="/student-organization/medical-assistants">Stark State College Association of Medical Assistants</a>
-        <a href="/student-organization/stark-stage-theater">Stark Stage Theater</a>
-        <a href="/student-organization/stark-voices">Stark Voices – Student Publication/Newspaper</a>
-        <a href="/student-organization/student-ambassadors">Student Ambassador Program</a>
-        <a href="/student-organization/sadha">Student American Dental Hygienist Association (SADHA)</a>
-        <a href="/student-organization/sga">Student Government Association/InterClub Council</a>
-        <a href="/student-organization/shima">Student Health Information Management Association (SHIMA)</a>
-        <a href="/student-organization/sna">Student Nurse Association (SNA)</a>
-        <a href="/student-organization/sota">Student Occupational Therapy Assistant Club (SOTA)</a>
-        <a href="/student-organization/spta">Student Physical Therapist Assistant Club (SPTA)</a>
-        <a href="/student-organization/the-edge">The Edge</a>
+        {% for club in clubs %}
+        <a href="/club/{{club.id}}">{{club.name}}</a>
+        {% empty %}
+        <a>No clubs yet</a>
+        {% endfor %}
       </div>
     </div>
   </div>

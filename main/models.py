@@ -13,11 +13,12 @@ class Student(models.Model):
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
     leader = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, related_name="led_club")
-    club_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)  # Changed from club_name to name
+    description = models.TextField(default="", blank=True)  # Default blank description
     pfp = models.ImageField(upload_to='club_pfps/', null=True, blank=True)  # Profile Picture Field
 
     def __str__(self):
-        return self.club_name
+        return self.name
 
 
 class Event(models.Model):
@@ -25,6 +26,7 @@ class Event(models.Model):
     club = models.ForeignKey('Club', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     date = models.DateField()
+    time = models.TimeField(default="17:00:00")  # Default time set to 5:00 PM
     description = models.TextField()
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)  # New ImageField
 
@@ -45,3 +47,12 @@ class Feedback(models.Model):
 
     class Meta:
         unique_together = ('student', 'event')
+
+class Authentication(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    password = models.CharField(max_length=128)
+    active = models.BooleanField(default=True)
+    associated_club = models.ForeignKey(Club, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.username

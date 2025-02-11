@@ -36,12 +36,12 @@
 }
 
 .club-title {
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 900;
 }
 
 .event-title {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .time {
@@ -96,53 +96,107 @@
     justify-content: end;
 }
 
-.clubs {
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    justify-content: baseline;
-    padding: 15px 0;
-    border-radius: 10px 0 0 10px;
-}
-
-.clubs > h1 {
-    transform: translateX(10px);
-}
-
-.club-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-
-}
-
-.club-list > a {
-    color: black;
-    padding: 15px 0 15px 10px;
-    text-decoration: none;
-    font-weight: 900;
-    vertical-align: middle;
-    transition: transform 200ms, background-color 100ms, color 100ms;
-    border-top: 1px rgb(204, 204, 204) solid;
-}
-
-.club-list > a:hover {
-    background-color: #1c90dd;
-    transform: translateX(-15px);
-    color: white;
-}
-
-/* Desktop */
-@media (min-width: 1000px) {
+@media (min-width: 700px) {
     .page-left, .page-right {
         display: flex;
-        flex: 2
+        flex: 1
     }
 
     .feed {
-        flex:5
+        flex:3
     }
 
+    .club-title {
+        font-size: 10px;
+    }
+
+    .event-title {
+        font-size: 20px;
+    }
+
+    .club-list > a {
+        font-size: 8px;
+    }
+
+    .clubs {
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: baseline;
+        padding: 15px 0;
+        border-radius: 10px 0 0 10px;
+    }
     
+    .clubs > h1 {
+        transform: translateX(10px);
+        font-size: 15px;
+    }
+    
+    .club-list {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+    
+    }
+    
+    .club-list > a {
+        color: black;
+        padding: 10px 0 10px 10px;
+        text-decoration: none;
+        font-weight: 900;
+        vertical-align: middle;
+        transition: transform 200ms, background-color 100ms, color 100ms;
+        border-top: 1px rgb(204, 204, 204) solid;
+    }
+    
+    .club-list > a:hover {
+        background-color: #1c90dd;
+        transform: translateX(-15px);
+        color: white;
+    }
+}
+
+/* Desktop */
+@media (min-width: 950px) {
+    .page-left, .page-right {
+        display: flex;
+        flex: 3
+    }
+
+    .feed {
+        flex:6
+    }
+
+    .club-title {
+        font-size: 10px;
+    }
+
+    .event-title {
+        font-size: 20px;
+    }
+
+    .club-list > a {
+        padding: 15px 0 15px 10px;
+    }
+
+    .clubs {
+    }
+    
+    .clubs > h1 {
+
+    }
+    
+    .club-list {
+
+    
+    }
+    
+    .club-list > a {
+
+    }
+    
+    .club-list > a:hover {
+
+    }
 }
