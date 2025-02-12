@@ -1,4 +1,8 @@
 from django.db import models
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 
 class Student(models.Model):
     id = models.CharField(primary_key=True, max_length=20, unique=True)  # Manually chosen ID
@@ -47,12 +51,3 @@ class Feedback(models.Model):
 
     class Meta:
         unique_together = ('student', 'event')
-
-class Authentication(models.Model):
-    username = models.CharField(max_length=150, unique=True)
-    password = models.CharField(max_length=128)
-    active = models.BooleanField(default=True)
-    associated_club = models.ForeignKey(Club, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.username

@@ -6,7 +6,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 <main>
-    <h1>login.html</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
 </main>
 
 {% endblock %}
