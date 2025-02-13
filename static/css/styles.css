@@ -14,12 +14,6 @@ body {
 
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-}
-
 /* Desktop */
 @media (min-width: 1000px) {
 }

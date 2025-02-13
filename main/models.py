@@ -16,7 +16,9 @@ class Student(models.Model):
 
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
-    leader = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, related_name="led_club")
+    active = models.BooleanField(default=True)
+    account = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None, related_name="led_clubs")
+    leader = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, default=None, related_name="led_clubs")
     name = models.CharField(max_length=255)  # Changed from club_name to name
     description = models.TextField(default="", blank=True)  # Default blank description
     pfp = models.ImageField(upload_to='club_pfps/', null=True, blank=True)  # Profile Picture Field

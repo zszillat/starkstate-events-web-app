@@ -1,202 +1,104 @@
-/* FEED ELEMENTS */
+.page-left, .page-right {
+    display: none;
+}
+
+main {
+    display: flex;
+    flex: 5;
+}
 
 .feed {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: baseline;
 }
 
 .event {
-    margin-top: 10px;
-    background-color: white;
     width: 90%;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 10px
+}
+
+.event > * {
+    width: 100%;
+    background-color: white;
 }
 
 .title-box {
-    width: 100%;
     display: flex;
-    height: 100px;
+    height: 90px;
+    justify-content: flex-start;
     align-items: center;
+    border-radius: 10px
+}
+
+.event-title-wrapper {
+    height: 100%;
+}
+
+.club-title {
+    font-weight: 900;
+    font-size: 13px;
+    width: 95%;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.event-title {
+    font-size: 16px;
+    width: 95%;
+    margin-top: 5px;
+    margin-left: 8px;
 }
 
 .student-org-img {
     height: 70%;
     border-radius: 50%;
     margin-left: 10px;
-    margin-right: 20px;
 }
 
-.event-title-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-}
-
-.club-title {
-    font-size: 12px;
-    font-weight: 900;
-}
-
-.event-title {
-    font-size: 20px;
-}
-
-.time {
+.event-time {
+    background-color: #1A2857;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 25px;
-    background-color: #0077C8;
-    color: white;
-    font-weight: 900;
-}
-
-
-.post-img {
-    width: 100%;
 }
 
 .more-details-section {
+    height: 65px;
     display: flex;
+    border-radius: 10px;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
 }
 
-.more-details-section p {
-    margin-left: 20px;
+.more-details-section > * {
+    margin: 0 10px;
 }
 
-.more-details-section button {
-    padding: 12px 12px;
-    background-color: #0077C8;
+.more-details-section > button {
+    background-color: #1A2857;
     color: white;
+    padding: 10px;
     border: none;
-    transform: 350ms background-color;
-    margin-right: 20px;
-    border-radius: 10px;
-}
-
-.more-details-section button:hover {
-    background-color: #1c90dd;
-}
-
-/* CLUB LIST DETAILS */
-
-.page-left, .page-right {
-    display: none;
-}
-
-.page-right {
-    align-items: start;
-    justify-content: end;
+    font-size: 10px;
 }
 
 @media (min-width: 700px) {
     .page-left, .page-right {
         display: flex;
-        flex: 1
+        flex: 1;
     }
 
     .feed {
-        flex:3
-    }
-
-    .club-title {
-        font-size: 10px;
-    }
-
-    .event-title {
-        font-size: 20px;
-    }
-
-    .club-list > a {
-        font-size: 8px;
-    }
-
-    .clubs {
-        background-color: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        justify-content: baseline;
-        padding: 15px 0;
-        border-radius: 10px 0 0 10px;
-    }
-    
-    .clubs > h1 {
-        transform: translateX(10px);
-        font-size: 15px;
-    }
-    
-    .club-list {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-    
-    }
-    
-    .club-list > a {
-        color: black;
-        padding: 10px 0 10px 10px;
-        text-decoration: none;
-        font-weight: 900;
-        vertical-align: middle;
-        transition: transform 200ms, background-color 100ms, color 100ms;
-        border-top: 1px rgb(204, 204, 204) solid;
-    }
-    
-    .club-list > a:hover {
-        background-color: #1c90dd;
-        transform: translateX(-15px);
-        color: white;
-    }
-}
-
-/* Desktop */
-@media (min-width: 950px) {
-    .page-left, .page-right {
-        display: flex;
-        flex: 3
-    }
-
-    .feed {
-        flex:6
-    }
-
-    .club-title {
-        font-size: 10px;
-    }
-
-    .event-title {
-        font-size: 20px;
-    }
-
-    .club-list > a {
-        padding: 15px 0 15px 10px;
-    }
-
-    .clubs {
-    }
-    
-    .clubs > h1 {
-
-    }
-    
-    .club-list {
-
-    
-    }
-    
-    .club-list > a {
-
-    }
-    
-    .club-list > a:hover {
-
+        flex: 3;
     }
 }

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <main>
   <div class="page-left">
+    <p>test</p>
   </div>
   <div class="feed">
     {% for event in events %}
@@ -19,7 +20,7 @@
           </div>
       </div>  
 
-      <div class="time"><p>{{ event.date }} {{ event.time }}</p></div>
+      <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
       <img src="{{ event.image.url }}" alt="" class="post-img">
       <div class="more-details-section">
         <p>{{ event.attendee_count }} Attending</p>
@@ -34,7 +35,6 @@
 
   <div class="page-right">
     <div class="clubs">
-      <h1>Student Organizations</h1>
       <div class="club-list">
         {% for club in clubs %}
         <a href="/club/{{club.id}}">{{club.name}}</a>
