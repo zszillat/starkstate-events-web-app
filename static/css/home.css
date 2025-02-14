@@ -35,7 +35,7 @@ main {
     height: 90px;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 10px
+    border-radius: 10px 10px 0 0
 }
 
 .event-title-wrapper {

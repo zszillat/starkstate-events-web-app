@@ -9,6 +9,8 @@ def logout_view(request):
     logout(request)
     return redirect("/")  # Redirect to login page after logout
 
+def add_event(request):
+    return render(request, "addevent.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -46,6 +48,12 @@ def homepage(request):
         'clubs': clubs
         })
 
+def my_events(request):
+    user = request.user  # Get the logged-in user
+    clubs = Club.objects.filter(account=user)  # Find clubs where the user is an account holder
+    events = Event.objects.filter(club__in=clubs)  # Get all events for these clubs
+
+    return render(request, 'myevents.html', {'events': events})
 
 def event(request):
     return render(request, 'event.html')

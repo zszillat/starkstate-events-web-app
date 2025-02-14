@@ -17,11 +17,11 @@ class Student(models.Model):
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
     active = models.BooleanField(default=True)
-    account = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None, related_name="led_clubs")
-    leader = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, default=None, related_name="led_clubs")
-    name = models.CharField(max_length=255)  # Changed from club_name to name
-    description = models.TextField(default="", blank=True)  # Default blank description
-    pfp = models.ImageField(upload_to='club_pfps/', null=True, blank=True)  # Profile Picture Field
+    account = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name="club")  # One-to-One Relationship
+    leader = models.OneToOneField(Student, on_delete=models.CASCADE, null=True, blank=True, related_name="club_leader")  # Ensuring each Student leads only one club
+    name = models.CharField(max_length=255)
+    description = models.TextField(default="", blank=True)
+    pfp = models.ImageField(upload_to='club_pfps/', null=True, blank=True)
 
     def __str__(self):
         return self.name

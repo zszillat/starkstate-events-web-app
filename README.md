@@ -16,4 +16,3 @@
 2. open command prompt and use cd to navigate to the repo e.g. 'cd "/users/myname/Documents/GitHub/starkstate-events-web-app"'
 3. type 'dir' and hit enter. if you are in the right place you should see manage.py as one of the listed files
 4. type 'python manage.py runserver' and hit enter. the server should be running as long as you keep that open on the command prompt
-
