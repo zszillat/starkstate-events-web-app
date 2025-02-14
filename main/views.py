@@ -3,14 +3,35 @@ from django.db.models import Count
 from .models import Event, Club
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomLoginForm
+from .forms import CustomLoginForm, EventForm
 
 def logout_view(request):
     logout(request)
     return redirect("/")  # Redirect to login page after logout
 
 def add_event(request):
-    return render(request, "addevent.html")
+    user = request.user
+
+    # Get the club associated with the logged-in user
+    try:
+        club = user.club
+    except Club.DoesNotExist:
+        club = None  # If no club is found, handle accordingly
+
+    if not club:
+        return render(request, 'error.html', {'message': 'You are not associated with any club.'})
+
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)  # Handle image upload
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.club = club  # Assign the event to the club
+            event.save()
+            return redirect('myevents')  # Redirect to a page listing all events (change as needed)
+    else:
+        form = EventForm()
+
+    return render(request, 'addevent.html', {'form': form})
 
 def login_view(request):
     if request.method == "POST":

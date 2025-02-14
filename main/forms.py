@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from .models import Event
 
 class CustomLoginForm(forms.Form):
     username = forms.CharField()
@@ -16,3 +17,12 @@ class CustomLoginForm(forms.Form):
             if not user:
                 raise forms.ValidationError("Invalid username or password")
         return cleaned_data
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['name', 'date', 'time', 'description', 'image']  # Include all required fields
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'time': forms.TimeInput(attrs={'type': 'time'}),
+        }
