@@ -1,7 +1,7 @@
 from django.utils.timezone import now
 from django.db.models import Count
 from .models import Event, Club
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomLoginForm, EventForm
 
@@ -27,11 +27,11 @@ def add_event(request):
             event = form.save(commit=False)
             event.club = club  # Assign the event to the club
             event.save()
-            return redirect('myevents')  # Redirect to a page listing all events (change as needed)
+            return redirect('my_events')  # Redirect to a page listing all events (change as needed)
     else:
         form = EventForm()
 
-    return render(request, 'addevent.html', {'form': form})
+    return render(request, 'add_event.html', {'form': form})
 
 def login_view(request):
     if request.method == "POST":
@@ -52,7 +52,7 @@ def login_view(request):
         })
 
 
-def homepage(request):
+def home(request):
     today = now().date()
 
     clubs = Club.objects.order_by('name')
@@ -74,13 +74,25 @@ def my_events(request):
     clubs = Club.objects.filter(account=user)  # Find clubs where the user is an account holder
     events = Event.objects.filter(club__in=clubs)  # Get all events for these clubs
 
-    return render(request, 'myevents.html', {'events': events})
+    return render(request, 'my_events.html', {'events': events})
+
+def edit_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id, club__account=request.user)
+    
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('my_events')  # or wherever you want to redirect
+    else:
+        form = EventForm(instance=event)
+
+    return render(request, 'edit_event.html', {'form': form, 'event': event})
+
+    
 
 def event(request):
     return render(request, 'event.html')
-
-def account(request):
-    return render(request, 'account.html')
 
 def new(request):
     return render(request, 'new.html')

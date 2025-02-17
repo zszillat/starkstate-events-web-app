@@ -8,7 +8,7 @@
     margin: 10px;
 }
 
-.edit-new-button {
+.edit-button {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -18,11 +18,11 @@
     border-radius: 5px;
 }
 
-.edit-new-button > img {
+.edit-button {
     width: 20px;
 }
 
-.edit-new-button > p {
+.edit-new-button p {
     color: white;
 }
 

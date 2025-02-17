@@ -1,3 +1,4 @@
+/* Header Styles */
 header {
     height: 80px;
     display: flex;
@@ -5,112 +6,117 @@ header {
     justify-content: space-between;
     background-color: white;
     width: 100%;
-}
-
-.header-wrapper {
-
+  }
+  
+  /* Header Wrapper */
+  .header-wrapper {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 15px;
-}
-
-.header-wrapper > img {
+  }
+  
+  .header-wrapper > img {
     height: 45%;
     margin-right: 10px;
-}
-
-.header-text-wrapper {
+  }
+  
+  /* Header Text Wrapper */
+  .header-text-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.header-text-wrapper > * {
+  }
+  
+  .header-text-wrapper > * {
     color: #1A2755;
-}
-
-.header-text-wrapper > h1 {
+  }
+  
+  .header-text-wrapper > h1 {
     font-size: 25px;
-}
-
-.menu {
+  }
+  
+  /* Menu Styles */
+  .menu {
     height: 100%;
     width: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-}
-
-.menu > img {
+  }
+  
+  .menu > img {
     width: 65%;
-    border: 2px #1A2755 solid;
+    border: 2px solid #1A2755;
     padding: 5px 8px;
-    transition: 200ms background-color linear;
-}
-
-.menu > img:hover {
+    transition: background-color 200ms linear;
+  }
+  
+  .menu > img:hover {
     background-color: #1A2857;
-}
-
-.header-nav {
+  }
+  
+  /* Header Navigation */
+  .header-nav {
     width: 100%;
-    height: 0px;
+    height: 0;
     background-color: white;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: 700ms height;
-    transition-timing-function: ease-in-out;;
-}
-
-.header-nav > * {
+    transition: height 700ms ease-in-out;
+  }
+  
+  .header-nav > * {
     color: black;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 0;
-}
-
-.header-nav > *:hover {
+  }
+  
+  .header-nav > *:hover {
     background-color: #1A2857;
     color: white;
-}
-
-.desktop-nav {
+  }
+  
+  /* Desktop Navigation */
+  .desktop-nav {
     display: none;
-}
-
-/* Desktop */
-@media (min-width: 700px) {
+  }
+  
+  /* Media Query for Desktop */
+  @media (min-width: 700px) {
     .menu {
-        display: none;
+      display: none;
     }
-
+  
     .desktop-nav {
-        display: flex;
-        width: 400px;
-        height: 100%;
-        justify-content: end;
-        align-items: center;
+      display: flex;
+      width: 400px;
+      height: 100%;
+      justify-content: flex-end;
+      align-items: center;
     }
-
+  
     .desktop-nav a {
-        color: rgb(82, 82, 82);
-        text-decoration: none;
-        font-size: 15px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 10px;
+      color: rgb(82, 82, 82);
+      text-decoration: none;
+      font-size: 15px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
     }
+  
     .desktop-nav a:hover {
-        background-color: rgb(240, 240, 240);
-        color: rgb(59, 59, 59);
+      background-color: rgb(240, 240, 240);
+      color: rgb(59, 59, 59);
     }
-}
+  }
+  
