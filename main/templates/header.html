@@ -14,15 +14,18 @@
 
     <div class="desktop-nav">
         {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <a href="{% url 'my_events' %}">My Events</a>
-        <a href="{% url 'logout' %}">Logout</a>
+            <p>Welcome, {{ user.username }}!</p>
+            <a class="{% if request.path == '/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'home' %}">Home</a>
+            <a class="{% if request.path == '/myevents/' or request.path == '/myevents/add/' or request.path|slice:':13' == '/myevents/edit/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'my_events' %}">My Events</a>
+            <a class="{% if request.path == '/clubs/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'clubs' %}">Clubs</a>
+            <a class="desktop-nav-link" href="{% url 'logout' %}">Logout</a>
         {% else %}
-        <a href="/" class="active">Home</a>
-        <a href="login">Login</a>
+            <a class="{% if request.path == '/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'home' %}">Home</a>
+            <a class="desktop-nav-link {% if request.path == '/clubs/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'clubs' %}">Clubs</a>
+            <a class="{% if request.path == '/login/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'login' %}">Login</a>
         {% endif %}
-    </div>
 
+    </div>
 
 </header>
 

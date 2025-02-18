@@ -59,16 +59,39 @@ header {
     display: none;
   }
 
+  .desktop-nav p {
+    font-size: 20px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+
   .desktop-nav a {
+    transition: background-color 250ms, color 200ms;
+  }
+
+  .desktop-nav a:hover {
+    background-color: #dedede;
+    color: black;
+    height: 30px;
+  }
+
+  .desktop-nav-link {
     background-color: #1A2755;
     color: white;
     text-decoration: none;
     padding: 5px 10px;
   }
 
+  .desktop-nav-link:hover {
+
+  }
+
   .active {
     background-color: #F2F4F7;
     color: black;
+    text-decoration: none;
+    padding: 5px 10px;
+    height: 30px;
   }
 
 }
