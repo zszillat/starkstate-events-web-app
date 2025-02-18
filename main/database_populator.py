@@ -63,4 +63,6 @@ def add_random_students(num_students):
 
         current_id += 1
 
-add_random_students(100)
+        print(student.first_name)
+
+add_random_students(5000)
