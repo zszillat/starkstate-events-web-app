@@ -32,11 +32,14 @@
 <div class="mobile-nav" id="mobileMenu">
     {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}!</p>
-    <a href="{% url 'my_events' %}">My Events</a>
-    <a href="{% url 'logout' %}">Logout</a>
+    <a class="mobile-nav-link" href="{% url 'home' %}">Home</a>
+    <a class="mobile-nav-link" href="{% url 'my_events' %}">My Events</a>
+    <a class="mobile-nav-link" href="{% url 'clubs' %}">Clubs</a>
+    <a class="mobile-nav-link" href="{% url 'logout' %}">Logout</a>
     {% else %}
-    <a href="/">Home</a>
-    <a href="login">Login</a>
+    <a class="mobile-nav-link" href="{% url 'home' %}">Home</a>
+    <a class="mobile-nav-link" href="{% url 'clubs' %}">Clubs</a>
+    <a class="mobile-nav-link" href="{% url 'login' %}">Login</a>
     {% endif %}
 </div>
 
