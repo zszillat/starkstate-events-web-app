@@ -34,7 +34,7 @@ def add_random_students(num_students):
     for _ in range(num_students):
         first_name = fake.first_name()
         last_name = fake.last_name()
-        # Generate a birthday (you can adjust age range as needed)
+        # Generate a birthday
         birthday = fake.date_of_birth(minimum_age=18, maximum_age=30)
         # Format birthday month and day as MMDD
         month_day = f"{birthday.month:02d}{birthday.day:02d}"
@@ -63,4 +63,4 @@ def add_random_students(num_students):
 
         current_id += 1
 
-Student.objects.all().delete()
+add_random_students(100)
