@@ -7,7 +7,21 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <main>
   <div class="page-left">
-    <p>test</p>
+      <div class="feedback">
+        <h1>Leave Feedback</h1>
+        <div class="past-events">
+          {% for past_event in past_events %}
+          <div class="past-event">
+            <h2>{{ past_event.name }}</h2>
+            <p>{{ past_event.club.name }}</p>
+            <p>{{ past_event.date }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+
+    </div>
   </div>
   <div class="feed">
     {% for event in events %}

@@ -4,6 +4,7 @@ from .models import Event, Club
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomLoginForm, EventForm
+from datetime import timedelta
 
 def logout_view(request):
     logout(request)
@@ -54,20 +55,28 @@ def login_view(request):
 
 def home(request):
     today = now().date()
+    four_weeks_ago = today - timedelta(weeks=4)
 
     clubs = Club.objects.order_by('name')
     
-    # Fetch events with related club data and annotate with attendee count
+    # Fetch upcoming events (events from today onwards)
     events = Event.objects.filter(date__gte=today) \
         .select_related('club') \
         .annotate(attendee_count=Count('attendance')) \
         .order_by('date')
 
+    # Fetch past events from the last 4 weeks excluding today
+    past_events = Event.objects.filter(date__range=[four_weeks_ago, today - timedelta(days=1)]) \
+        .select_related('club') \
+        .annotate(attendee_count=Count('attendance')) \
+        .order_by('date')[:10]  # Limit to 10 entries
+
     return render(request, 'home.html', {
         "user": request.user,
         'events': events,
+        'past_events': past_events,
         'clubs': clubs
-        })
+    })
 
 def my_events(request):
     user = request.user  # Get the logged-in user

@@ -102,7 +102,7 @@ main {
     .page-right {
         display: flex;
         flex: 2;
-        justify-content: center;
+        justify-content: end;
         align-items: baseline;
     }
 
@@ -115,11 +115,16 @@ main {
         flex: 5;
     }
 
+    .event {
+        width: 95%;
+    }
+
     .clubs {
         background-color: white;
         margin-top: 30px;
         border-radius: 30px 0 0 30px;
         height: auto;
+        width: 80%;
     }
 
     .clubs h1 {
@@ -139,15 +144,54 @@ main {
         padding: 6px 0;
         text-decoration: none;
         padding-left: 15px;
-        transition: transform 300ms;
+        transition: transform 300ms, background-color 250ms, color 250ms;
         color: black;
         border-top: rgb(216, 216, 216) 1px solid;
+        font-size: 13px;
+        font-weight: 700;
     }
 
     .club-list a:hover {
         background-color: #1A2857;
         color: white;
-        transform: translateX(-6px);
+        transform: translateX(-5px);
+    }
+
+    .page-left {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+    }
+
+    .feedback {
+        background-color: white;
+        width: 85%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 10px;
+        padding-top: 12px;
+    }
+
+    .feedback h1 {
+        font-size: 15px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .past-event {
+        padding: 5px 9px;
+        border-top: rgb(236, 236, 236) 0.5px solid;
+        border-bottom: rgb(236, 236, 236) 0.5px solid;
+    }
+
+    .past-event h2 {
+        font-size: 10px;
+    }
+
+    .past-event p {
+        font-size: 9px;
+        color: grey;
     }
 
     
