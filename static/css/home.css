@@ -3,16 +3,14 @@
 }
 
 main {
-    display: flex;
-    flex: 5;
+    padding: 0;
 }
 
 .feed {
-    /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: baseline;
+    justify-content: stretch;
 }
 
 .event {
@@ -21,8 +19,9 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
-    border-radius: 10px
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    margin: 10px 0;
 }
 
 .event > * {
@@ -35,19 +34,11 @@ main {
     height: 90px;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 10px 10px 0 0
+    border-radius: 10px 10px 0 0;
 }
 
 .event-title-wrapper {
     height: 100%;
-}
-
-.club-title {
-    font-weight: 900;
-    font-size: 13px;
-    width: 95%;
-    margin-top: 8px;
-    margin-left: 8px;
 }
 
 .event-title {
@@ -61,6 +52,16 @@ main {
     height: 70%;
     border-radius: 50%;
     margin-left: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px rgb(251, 251, 251) solid;
+}
+
+.club-title {
+    font-weight: 900;
+    font-size: 13px;
+    width: 95%;
+    margin-top: 8px;
+    margin-left: 8px;
 }
 
 .event-time {
@@ -75,7 +76,7 @@ main {
 .more-details-section {
     height: 65px;
     display: flex;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     justify-content: space-between;
     align-items: center;
 }
@@ -93,12 +94,61 @@ main {
 }
 
 @media (min-width: 700px) {
-    .page-left, .page-right {
+    .page-left {
         display: flex;
-        flex: 1;
+        flex: 2;
+    }
+
+    .page-right {
+        display: flex;
+        flex: 2;
+        justify-content: center;
+        align-items: baseline;
+    }
+
+    main {
+        display: flex;
+        width: 100%;
     }
 
     .feed {
-        flex: 3;
+        flex: 5;
     }
+
+    .clubs {
+        background-color: white;
+        margin-top: 30px;
+        border-radius: 30px 0 0 30px;
+        height: auto;
+    }
+
+    .clubs h1 {
+        margin-top: 15px;
+        margin-left: 15px;
+        font-size: 15px;
+    }
+
+    .club-list {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 0 45px 0;
+    }
+
+    .club-list a {
+        padding: 6px 0;
+        text-decoration: none;
+        padding-left: 15px;
+        transition: transform 300ms;
+        color: black;
+        border-top: rgb(216, 216, 216) 1px solid;
+    }
+
+    .club-list a:hover {
+        background-color: #1A2857;
+        color: white;
+        transform: translateX(-6px);
+    }
+
+    
 }
