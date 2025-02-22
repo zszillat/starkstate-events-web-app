@@ -93,6 +93,7 @@ header {
 
   .desktop-nav a {
     transition: background-color 250ms, color 200ms;
+    border-radius: 10px 10px 0 0;
   }
 
   .desktop-nav a:hover {
@@ -106,6 +107,7 @@ header {
     color: white;
     text-decoration: none;
     padding: 5px 10px;
+
   }
 
 

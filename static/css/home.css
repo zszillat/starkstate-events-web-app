@@ -171,6 +171,7 @@ main {
         align-items: stretch;
         margin-top: 10px;
         padding-top: 12px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
     }
 
     .feedback h1 {
@@ -183,6 +184,11 @@ main {
         padding: 5px 9px;
         border-top: rgb(236, 236, 236) 0.5px solid;
         border-bottom: rgb(236, 236, 236) 0.5px solid;
+    }
+
+    .past-event:hover {
+        cursor: grab;
+        background-color: rgb(230, 230, 230);
     }
 
     .past-event h2 {
