@@ -1,8 +1,64 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home - My Site{% endblock %}
+{% block title %}Spartan Engage{% endblock %}
 
 {% block content %}
-  <!-- <h1>Welcome to My Site!</h1>
-  <p>This is the home page.</p> -->
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<main>
+  <div class="page-left">
+      <div class="feedback">
+        <h1>Leave Feedback</h1>
+        <div class="past-events">
+          {% for past_event in past_events %}
+          <div class="past-event">
+            <h2>{{ past_event.name }}</h2>
+            <p>{{ past_event.club.name }}</p>
+            <p>{{ past_event.date }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="feed">
+    {% for event in events %}
+    <div class="event">
+      <div class="title-box">
+          <img src="{{ event.club.pfp.url }}" alt="" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">{{ event.club.name }}</p>
+            <p class="event-title">{{ event.name }}</p>
+          </div>
+      </div>  
+
+      <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
+      <img src="{{ event.image.url }}" alt="" class="post-img">
+      <div class="more-details-section">
+        <p>{{ event.attendee_count }} Attending</p>
+        <button>More Details</button>
+      </div>
+    </div>
+    {% empty %}
+    <p>No upcoming events.</p>
+    {% endfor %}
+  </div>
+
+
+  <div class="page-right">
+    <div class="clubs">
+      <h1>Student Organizations</h1>
+      <div class="club-list">
+        {% for club in clubs %}
+        <a href="/club/{{club.id}}">{{club.name}}</a>
+        {% empty %}
+        <a>No clubs yet</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+
 {% endblock %}

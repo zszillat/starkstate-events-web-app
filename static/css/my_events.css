@@ -1,0 +1,31 @@
+.event {
+    width: 90%;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #1A2857;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.edit-button {
+    width: 20px;
+}
+
+.edit-new-button p {
+    color: white;
+}
+
+@media (min-width: 700px) {
+
+}

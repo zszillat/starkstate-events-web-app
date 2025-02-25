@@ -4,20 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}My Site{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'css/header.css' %}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'images/stark-state-logo.png' %}" type="image/x-icon">
 </head>
 <body>
-  <header>
-    {% include 'header.html' %}
-  </header>
-
-
-  <main>
+  {% include 'header.html' %}
     {% block content %}
-    <!-- Page-specific content goes here -->
+
     {% endblock %}
-  </main>
+  <script src="{% static 'js/header.js' %}"></script>
 </body>
 </html>
