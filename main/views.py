@@ -52,7 +52,6 @@ def login_view(request):
         "user": request.user
         })
 
-
 def home(request):
     today = now().date()
     four_weeks_ago = today - timedelta(weeks=4)
@@ -96,18 +95,23 @@ def edit_event(request, event_id):
     else:
         form = EventForm(instance=event)
 
-    return render(request, 'edit_event.html', {'form': form, 'event': event})
+    return render(request, 'edit_event.html', {'form': form, 'event': event})    
 
-    
+def event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    return render(request, 'event.html', { 'event' : event })
 
-def event(request):
-    return render(request, 'event.html')
+def feedback(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    return render(request, 'feedback.html', { 'event' : event })
 
 def new(request):
     return render(request, 'new.html')
 
-def club(request):
-    return render(request, 'club.html')
+def club(request, club_id):
+    club = get_object_or_404(Club, id=club_id)
+    return render(request, 'club.html', {'club': club})
 
 def clubs(request):
-    return render(request, 'clubs.html')
+    clubs = Club.objects.order_by('name')
+    return render(request, 'clubs.html', {'clubs' : clubs})

@@ -6,7 +6,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/clubs.css' %}">
 <main>
-    <h1>clubs.html</h1>
+    {% for club in clubs %}
+    <div class="club">
+        <a href='/club/{{ club.id }}'>{{ club.name }}</a>
+    </div>
+    {% endfor %}
 </main>
 
 {% endblock %}
