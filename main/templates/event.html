@@ -20,6 +20,9 @@
         <div class="more-details-section">
         <p>{{ event.attendee_count }} Attending</p>
         <p>{{ event.description }}</p>
+        {% if is_past %}
+        <a href="{% url 'leave_feedback' event.id %}" >Leave Feedback</a>
+        {% endif %}
       </div>
     </div>
 </main>

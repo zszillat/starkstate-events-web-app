@@ -99,7 +99,11 @@ def edit_event(request, event_id):
 
 def event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    return render(request, 'event.html', { 'event' : event })
+    is_past = event.date < now().date()
+    return render(request, 'event.html', {
+        'event': event,
+        'is_past': is_past
+    })
 
 def feedback(request, event_id):
     event = get_object_or_404(Event, id=event_id)
