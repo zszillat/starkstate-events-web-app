@@ -36,7 +36,7 @@
     {% for event in events %}
     <div class="event">
       <div class="title-box">
-          <img src="{{ event.club.pfp.url }}" alt="" class="student-org-img">
+          <img src="{{ event.club.pfp.url }}" alt="alt-text" class="student-org-img">
           <div class="event-title-wrapper">
             <p class="club-title">{{ event.club.name }}</p>
             <p class="event-title">{{ event.name }}</p>
@@ -44,7 +44,8 @@
       </div>  
 
       <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
-      <img src="{{ event.image.url }}" alt="" class="post-img">
+
+      <img src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="Event image" class="post-img">
       <div class="more-details-section">
         <p>{{ event.attendee_count }} Attending</p>
         <a href="/event/{{ event.id }}">More Details</a>

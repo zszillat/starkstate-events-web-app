@@ -1,9 +1,9 @@
 from django.utils.timezone import now
 from django.db.models import Count
-from .models import Event, Club
+from .models import Event, Club, Feedback
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomLoginForm, EventForm
+from .forms import CustomLoginForm, EventForm, FeedbackForm
 from datetime import timedelta
 
 def logout_view(request):
@@ -103,7 +103,33 @@ def event(request, event_id):
 
 def feedback(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    return render(request, 'feedback.html', { 'event' : event })
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            student = form.cleaned_data['student']  # Set in clean() method
+            feedback_text = form.cleaned_data['feedback']
+
+            # Prevent duplicate feedback submission
+            feedback_obj, created = Feedback.objects.get_or_create(
+                student=student,
+                event=event,
+                defaults={'feedback': feedback_text}
+            )
+            if not created:
+                form.add_error(None, "You’ve already submitted feedback for this event.")
+            else:
+                return redirect('thank_you')  # Customize this route as needed
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'feedback.html', {
+        'form': form,
+        'event': event
+    })
+
+def thanks(request):
+    return render(request, 'thanks.html')
 
 def new(request):
     return render(request, 'new.html')

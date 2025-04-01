@@ -53,3 +53,23 @@ class Feedback(models.Model):
 
     class Meta:
         unique_together = ('student', 'event')
+
+class FeedbackForm(forms.Form):
+    student_id = forms.IntegerField(label="Student ID")
+    last_name = forms.CharField(label="Last Name")
+    feedback = forms.CharField(widget=forms.Textarea, label="Feedback")
+
+    def clean(self):
+        cleaned_data = super().clean()
+        student_id = cleaned_data.get('student_id')
+        last_name = cleaned_data.get('last_name')
+
+        if student_id and last_name:
+            try:
+                student = Student.objects.get(id=student_id)
+                if student.last_name.lower() != last_name.lower():
+                    raise forms.ValidationError("Student ID and last name do not match.")
+                cleaned_data['student'] = student  # Optional: pass the student instance to the view
+            except Student.DoesNotExist:
+                raise forms.ValidationError("Student with this ID does not exist.")
+        return cleaned_data

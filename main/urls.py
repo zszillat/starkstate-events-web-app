@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('event/<int:event_id>', views.event, name='event_details'),
     path('event/<int:event_id>/feedback', views.feedback, name='leave_feedback'),
+    path('thanks', views.thanks, name="thank_you"),
     path("login/", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
     path("myevents/", views.my_events, name="my_events"),
