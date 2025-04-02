@@ -112,35 +112,43 @@ main {
         height: auto;
         width: 85%;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+        border: 1px solid #0277C8;
     }
     .clubs h1 {
-        margin-top: 15px;
-        margin-left: 15px;
+        width: 100%;
+        height: 35px;
+        text-align: center;
         font-size: 15px;
+        color: white;
+        background-color: #0277C8;
+        line-height: 35px;
     }
-
     .club-list {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        padding: 12px 0 45px 0;
+        padding: 0 0 45px 0;
     }
-
     .club-list a {
         padding: 6px 0;
         text-decoration: none;
         padding-left: 15px;
-        transition: transform 300ms, background-color 250ms, color 250ms;
+        transition: 
+            background-color 0.1s ease,
+            color 0.1s ease,
+            transform 0.5s ease,
+            box-shadow 0.5s ease;
+        transform: translateZ(0); /* Helps with smoother animations */
         color: black;
         border-top: rgb(216, 216, 216) 1px solid;
         font-size: 13px;
         font-weight: 700;
     }
-
     .club-list a:hover {
-        background-color: #1A2857;
+        background-color: #0277C8;
         color: white;
-        transform: translateX(-5px);
+        transform: scale(1.0025) translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .page-left {
@@ -156,35 +164,29 @@ main {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        margin-top: 10px;
+        margin-top: 30px;
         padding-top: 12px;
+        
     }
-
     .feedback h1 {
         font-size: 15px;
         text-align: center;
         margin-bottom: 10px;
     }
-
     .past-event {
         padding: 5px 9px;
         border-top: rgb(236, 236, 236) 0.5px solid;
         border-bottom: rgb(236, 236, 236) 0.5px solid;
     }
-
     .past-event:hover {
         cursor: grab;
         background-color: rgb(230, 230, 230);
     }
-
     .past-event h2 {
         font-size: 10px;
     }
-
     .past-event p {
         font-size: 9px;
         color: grey;
     }
-
-    
 }
