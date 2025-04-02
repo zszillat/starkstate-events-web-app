@@ -2,10 +2,6 @@
 * {
     margin: 0;
     padding: 0;
-  }
-
-img {
-  width: 25px;
 }
   
 body {
@@ -16,6 +12,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: baseline;
+  min-height: 110vh;
 }
 
   
