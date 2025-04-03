@@ -15,12 +15,11 @@
     {% for event in events %}
     <div class="event">
         <div class="event-details">
-            <p>{{ event.id }}</p>
             <h2>{{ event.name }}</h2>
             <p>{{ event.date }} at {{ event.time }}</p>
             <p>{{ event.description|truncatechars:100 }}</p>
         </div>
-
+    
         <div>
             <a href="{% url 'edit_event' event.id %}">
                 <p>Edit</p>

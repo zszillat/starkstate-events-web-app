@@ -1,44 +1,77 @@
-/* Container for the event page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F2F4F7;
+}
+
+/* Main Container */
 .event-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 1rem;
-  }
-  
-  /* Styling for the event form */
-  .event-form {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Form field styling */
-  .event-form input,
-  .event-form textarea,
-  .event-form select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Submit button styling */
-  .event-form .btn-submit {
-    background-color: #007bff;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .event-form .btn-submit:hover {
-    background-color: #0056b3;
-  }
-  
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.event-container h2 {
+  font-size: 1.8rem;
+  color: #1A2857;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Form Layout */
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Form Fields */
+.event-form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.event-form label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.event-form input,
+.event-form textarea,
+.event-form select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.event-form input:focus,
+.event-form textarea:focus,
+.event-form select:focus {
+  border-color: #1A2857;
+  outline: none;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #1A2857;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-submit:hover {
+  background-color: #0f1b3f;
+}
