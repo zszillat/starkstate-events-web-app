@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomLoginForm, EventForm, FeedbackForm
 from datetime import timedelta
+from django.views.decorators.http import require_POST
 
 def logout_view(request):
     logout(request)
@@ -145,3 +146,9 @@ def club(request, club_id):
 def clubs(request):
     clubs = Club.objects.order_by('name')
     return render(request, 'clubs.html', {'clubs' : clubs})
+
+@require_POST
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id, club__account=request.user)
+    event.delete()
+    return redirect('my_events')

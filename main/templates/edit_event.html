@@ -11,10 +11,19 @@
     <h1>Create Event</h1>
     
     <form method="post" enctype="multipart/form-data" class="event-form">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn-submit">Create Event</button>
-    </form>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-submit">
+          {% if event %}Save Changes{% else %}Create Event{% endif %}
+        </button>
+      </form>
+      
+      {% if event %}
+        <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Are you sure you want to delete this event?');">
+          {% csrf_token %}
+          <button type="submit" class="btn-delete">Delete Event</button>
+        </form>
+      {% endif %}   
   </div>
 </main>
 {% endblock %}

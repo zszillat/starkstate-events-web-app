@@ -6,7 +6,6 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/my_events.css' %}">
 <main>
-
     <h1>My Events</h1> 
     <a class="edit-new-button" href="add">
         <p>New</p>
@@ -25,8 +24,16 @@
                 <p>Edit</p>
                 <img src="{% static 'images/edit.svg' %}" alt="pencil icon" class="edit-button">
             </a>
+    
+            <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Delete this event?');" style="margin-top: 0.5rem;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">
+                    <p>Delete</p>
+                    <img src="{% static 'images/delete.svg' %}" alt="trash icon" class="edit-button">
+                </button>
+            </form>
         </div>
-    </div>
+    </div>    
     {% endfor %}
 </main>
 <script src="{% static 'js/myevents.js' %}"></script>
