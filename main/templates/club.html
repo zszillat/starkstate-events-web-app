@@ -5,11 +5,23 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/club.css' %}">
-<main>
 
-    <h1>{{ club.name }}</h1>
-    <p>{{club.description}}</p>
+<main class="club-container">
+    <div class="club-card">
 
+        <img class="club-pfp" src="{{ club.pfp.url }}" alt="{{ club.name }} profile picture">
+
+        <h1 class="club-title">{{ club.name }}</h1>
+
+        <blockquote class="club-quote">
+            {{ club.description }}
+        </blockquote>
+
+        <div class="club-meta">
+            <p><strong>Leader:</strong> {{ club.leader.first_name }} {{ club.leader.last_name }}</p>
+            <p><strong>Contact:</strong> <a href="mailto:{{ club.leader.email }}">{{ club.leader.email }}</a></p>
+        </div>
+    </div>
 </main>
-
 {% endblock %}
+{% comment %} TODO Add Club's future and past events {% endcomment %}

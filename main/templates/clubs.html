@@ -7,9 +7,13 @@
 <link rel="stylesheet" href="{% static 'css/clubs.css' %}">
 <main>
     {% for club in clubs %}
-    <div class="club">
-        <a href='/club/{{ club.id }}'>{{ club.name }}</a>
-    </div>
+    <a class="club-link" href="/club/{{ club.id }}">
+        <div class="club">
+            <img src="{{ club.pfp.url }}" alt="{{ club.name }} profile picture">
+            <div class="club-name">{{ club.name }}</div>
+            <p class="club-desc">{{ club.description }}</p>
+        </div>
+    </a>
     {% endfor %}
 </main>
 
