@@ -1,68 +1,40 @@
-from faker import Faker
 import os
 import sys
+import csv
+import django
 
-# Set up the Python path
+# Django setup (only needed if running standalone)
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
-
-# Set up Django environment
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "starkstate_events_web_app.settings")
-import django
 django.setup()
 
-# Now the import should work
-from main.models import Student
+from main.models import Attendance, Event, Student  # Replace 'main' with your app name
 
-def add_random_students(num_students):
-    fake = Faker()
-    # Base ID: 00100000 as integer (100000)
-    base_id = 100000
+def load_attendance_from_csv(csv_path="dummy_data/event_attendance.csv"):
+    print(f"📂 Importing attendance from {csv_path}")
 
-    # Determine the current highest ID in the Student table
-    max_student = Student.objects.order_by("-id").first()
-    if max_student:
-        try:
-            # Convert existing id to an integer and increment
-            current_id = int(max_student.id) + 1
-        except ValueError:
-            # If conversion fails, fallback to base_id
-            current_id = base_id
-    else:
-        current_id = base_id
+    with open(csv_path, newline='') as f:
+        reader = csv.DictReader(f)
+        count = 0
+        skipped = 0
 
-    for _ in range(num_students):
-        first_name = fake.first_name()
-        last_name = fake.last_name()
-        # Generate a birthday
-        birthday = fake.date_of_birth(minimum_age=18, maximum_age=30)
-        # Format birthday month and day as MMDD
-        month_day = f"{birthday.month:02d}{birthday.day:02d}"
-        
-        # Construct the initial email: first initial + last name + birthday (MMDD) @starkstate.net
-        base_email = f"{first_name[0].lower()}{last_name.lower()}{month_day}@starkstate.net"
-        
-        # Check if this email already exists
-        if Student.objects.filter(email=base_email).exists():
-            # If email exists, append the student id instead
-            email = f"{first_name[0].lower()}{last_name.lower()}{current_id:08d}@starkstate.net"
-        else:
-            email = base_email
+        for row in reader:
+            try:
+                event = Event.objects.get(id=row["event_id"])
+                student = Student.objects.get(id=row["student_id"])
 
-        # Format the student ID as an 8-digit string with leading zeros
-        student_id = f"{current_id:08d}"
+                Attendance.objects.get_or_create(
+                    student=student,
+                    event=event
+                )
+                count += 1
 
-        # Create and save the new student
-        student = Student(
-            id=student_id,
-            first_name=first_name,
-            last_name=last_name,
-            email=email
-        )
-        student.save()
+            except (Event.DoesNotExist, Student.DoesNotExist):
+                skipped += 1
+                continue
 
-        current_id += 1
+    print(f"✅ Done! {count} attendance records added. {skipped} skipped (missing student/event).")
 
-        print(student.first_name)
-
-add_random_students(5000)
+if __name__ == "__main__":
+    load_attendance_from_csv()

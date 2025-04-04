@@ -21,7 +21,12 @@ class Club(models.Model):
     leader = models.OneToOneField(Student, on_delete=models.CASCADE, null=True, blank=True, related_name="club_leader")  # Ensuring each Student leads only one club
     name = models.CharField(max_length=255)
     description = models.TextField(default="", blank=True)
-    pfp = models.ImageField(upload_to='club_pfps/', null=True, blank=True)
+    pfp = models.ImageField(
+        upload_to='club_pfps/',
+        null=True,
+        blank=True,
+        default='defaultpfp.png'  # This image should exist in your media root
+    )
 
     def __str__(self):
         return self.name
@@ -34,7 +39,13 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField(default="17:00:00")  # Default time set to 5:00 PM
     description = models.TextField()
-    image = models.ImageField(upload_to='event_images/', null=True, blank=True)  # New ImageField
+    image = models.ImageField(
+        upload_to='event_images/',
+        null=True,
+        blank=True,
+        default='defaultevent.png'  # This image should also be in your media root
+    )
+
 
     def __str__(self):
         return self.name
