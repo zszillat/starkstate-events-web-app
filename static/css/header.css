@@ -1,7 +1,6 @@
 .desktop-nav {
   display: none;
 }
-
 .mobile-nav {
   display: flex;
   height: 0px;
@@ -14,7 +13,6 @@
   transition: 350ms height;
   transition-timing-function: ease-in-out;;
 }
-
 header {
   height: 100px;
   width: 100%;
@@ -24,26 +22,22 @@ header {
   align-items: center;
   color: #1A2755;
 }
-
 .header-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
 }
-
 .header-text-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-left: 10px;
-  font-size: 10px;
+  font-size: 14px;
 }
-
 .header-wrapper img {
   width: 65px;
 }
-
 #menuToggleButton {
   width: 45px;
   margin-right: 10px;
@@ -68,7 +62,7 @@ header {
   }
 
   .header-text-wrapper {
-    font-size: 10px;
+    font-size: 18px;
   }
 
   .desktop-nav {

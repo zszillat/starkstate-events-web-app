@@ -34,7 +34,7 @@ def load_attendance_from_csv(csv_path="dummy_data/event_attendance.csv"):
                 skipped += 1
                 continue
 
-    print(f"✅ Done! {count} attendance records added. {skipped} skipped (missing student/event).")
+    print(f"Done! {count} attendance records added. {skipped} skipped (missing student/event).")
 
 if __name__ == "__main__":
     load_attendance_from_csv()

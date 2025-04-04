@@ -4,6 +4,8 @@ main {
     gap: 1rem;
     padding: 1rem;
     justify-content: center;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .club-link {
