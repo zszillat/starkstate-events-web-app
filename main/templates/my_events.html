@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/my_events.css' %}">
 <main>
     <h1>My Events</h1> 
-    <a class="edit-new-button" href="add">
+    <a class="edit-new-button" href="{% url 'add_event' %}">
         <p>New</p>
         <img src="{% static 'images/new.svg' %}" alt="plus icon" class="edit-button">
     </a>

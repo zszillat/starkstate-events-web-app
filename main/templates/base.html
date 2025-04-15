@@ -5,15 +5,26 @@
   <meta charset="UTF-8">
   <title>{% block title %}My Site{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Global CSS -->
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+  <!-- Additional CSS can be added in child templates -->
+  {% block css %}{% endblock %}
+
   <link rel="shortcut icon" href="{% static 'images/stark-state-logo.png' %}" type="image/x-icon">
 </head>
 <body>
   {% include 'header.html' %}
-    {% block content %}
 
-    {% endblock %}
+  <!-- Main content block -->
+  {% block content %}{% endblock %}
+
+  <!-- Global JavaScript -->
   <script src="{% static 'js/header.js' %}"></script>
+
+  <!-- Additional JavaScript can be added in child templates -->
+  {% block js %}{% endblock %}
 </body>
 </html>

@@ -22,16 +22,13 @@
             document.querySelectorAll('.past-event').forEach(function(element) {
               element.addEventListener('click', function() {
                 const eventId = this.dataset.eventId;
-                window.location.href = `/event/${eventId}/feedback#form`;
+                window.location.href = "{% url 'leave_feedback' 0 %}".replace("0", eventId) + "#form";
               });
             });
           </script>
         </div>
       </div>
-
-
     </div>
-  </div>
   <div class="feed">
     {% for event in events %}
     <div class="event">
@@ -48,7 +45,7 @@
       <img src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="Event image" class="post-img">
       <div class="more-details-section">
         <p>{{ event.attendee_count }} Attending</p>
-        <a href="/event/{{ event.id }}">More Details</a>
+        <a href="{% url 'event_details' event.id %}">More Details</a>
       </div>
     </div>
     {% empty %}
@@ -56,13 +53,12 @@
     {% endfor %}
   </div>
 
-
   <div class="page-right">
     <div class="clubs">
       <h1>Student Organizations</h1>
       <div class="club-list">
         {% for club in clubs %}
-        <a href="/club/{{club.id}}">{{club.name}}</a>
+        <a href="{% url 'club' club.id %}">{{ club.name }}</a>
         {% empty %}
         <a>No clubs yet</a>
         {% endfor %}

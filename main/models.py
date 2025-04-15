@@ -1,8 +1,6 @@
 from django.db import models
-from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-
 
 class Student(models.Model):
     id = models.CharField(primary_key=True, max_length=20, unique=True)  # Manually chosen ID
@@ -12,7 +10,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.first_name} {self.last_name}"
-
 
 class Club(models.Model):
     id = models.AutoField(primary_key=True)
@@ -31,7 +28,6 @@ class Club(models.Model):
     def __str__(self):
         return self.name
 
-
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
     club = models.ForeignKey('Club', on_delete=models.CASCADE)
@@ -45,7 +41,6 @@ class Event(models.Model):
         blank=True,
         default='defaultevent.png'  # This image should also be in your media root
     )
-
 
     def __str__(self):
         return self.name
@@ -64,23 +59,3 @@ class Feedback(models.Model):
 
     class Meta:
         unique_together = ('student', 'event')
-
-class FeedbackForm(forms.Form):
-    student_id = forms.IntegerField(label="Student ID")
-    last_name = forms.CharField(label="Last Name")
-    feedback = forms.CharField(widget=forms.Textarea, label="Feedback")
-
-    def clean(self):
-        cleaned_data = super().clean()
-        student_id = cleaned_data.get('student_id')
-        last_name = cleaned_data.get('last_name')
-
-        if student_id and last_name:
-            try:
-                student = Student.objects.get(id=student_id)
-                if student.last_name.lower() != last_name.lower():
-                    raise forms.ValidationError("Student ID and last name do not match.")
-                cleaned_data['student'] = student  # Optional: pass the student instance to the view
-            except Student.DoesNotExist:
-                raise forms.ValidationError("Student with this ID does not exist.")
-        return cleaned_data
