@@ -14,17 +14,37 @@
               <p class="event-title">{{ event.name }}</p>
             </div>
         </div>  
-  
         <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
         <img src="{{ event.image.url }}" alt="" class="post-img">
         <div class="more-details-section">
-        <p>{{ event.attendee_count }} Attending</p>
-        <p>{{ event.description }}</p>
-        {% if is_past %}
-        <a href="{% url 'leave_feedback' event.id %}" >Leave Feedback</a>
-        {% endif %}
-      </div>
+            <p>{{ event.attendee_count }} Attending</p>
+            <p>{{ event.description }}</p>
+        </div>
     </div>
+
+    {% if form %}
+        {% if form_type == "feedback" %}
+            <h2>Submit Feedback for {{ event.name }}</h2>
+        {% elif form_type == "rsvp" %}
+            <h2>RSVP for {{ event.name }}</h2>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">
+                {% if form_type == "feedback" %}
+                    Submit Feedback
+                {% elif form_type == "rsvp" %}
+                    RSVP
+                {% endif %}
+            </button>
+            {% if form_type == "feedback" %}
+                <input type="hidden" name="feedback" value="true">
+            {% elif form_type == "rsvp" %}
+                <input type="hidden" name="rsvp" value="true">
+            {% endif %}
+        </form>
+    {% endif %}
 </main>
 
 {% endblock %}

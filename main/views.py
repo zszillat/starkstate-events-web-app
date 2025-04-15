@@ -1,6 +1,6 @@
 from django.utils.timezone import now
 from django.db.models import Count
-from .models import Event, Club, Feedback
+from .models import Event, Club, Feedback, Student, Attendance
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomLoginForm, EventForm, FeedbackForm
@@ -98,13 +98,79 @@ def edit_event(request, event_id):
 
     return render(request, 'edit_event.html', {'form': form, 'event': event})    
 
+
+from django.utils.timezone import now
+from django.db.models import Count
+from .models import Event, Club, Feedback, Student, Attendance
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from .forms import CustomLoginForm, EventForm, FeedbackForm
+from datetime import timedelta
+from django.views.decorators.http import require_POST
+
+# ... other view functions remain unchanged ...
+
 def event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    is_past = event.date < now().date()
-    return render(request, 'event.html', {
-        'event': event,
-        'is_past': is_past
-    })
+    today = now().date()
+    # Now: if event date is before today, use FeedbackForm.
+    if event.date < today:
+        form_type = "feedback"
+        if request.method == "POST" and 'feedback' in request.POST:
+            form = FeedbackForm(request.POST)
+            if form.is_valid():
+                student = form.cleaned_data['student']  # Set in the form clean() method.
+                feedback_text = form.cleaned_data['feedback']
+                # Create Feedback if one doesn't already exist.
+                feedback_obj, created = Feedback.objects.get_or_create(
+                    student=student,
+                    event=event,
+                    defaults={'feedback': feedback_text}
+                )
+                if created:
+                    return redirect('thank_you')
+                else:
+                    form.add_error(None, "You’ve already submitted feedback for this event.")
+        else:
+            form = FeedbackForm()
+    else:
+        # If event is today or in the future, show the RSVP form.
+        form_type = "rsvp"
+        from django import forms
+        class RSVPForm(forms.Form):
+            student_id = forms.CharField(label="Student ID")
+            last_name = forms.CharField(label="Last Name")
+
+            def clean(self):
+                cleaned_data = super().clean()
+                student_id = cleaned_data.get('student_id')
+                last_name = cleaned_data.get('last_name')
+                if student_id and last_name:
+                    try:
+                        student = Student.objects.get(id=student_id)
+                        if student.last_name.lower() != last_name.lower():
+                            raise forms.ValidationError("Student ID and last name do not match.")
+                        cleaned_data['student'] = student
+                    except Student.DoesNotExist:
+                        raise forms.ValidationError("Student ID and last name do not match.")
+                return cleaned_data
+
+        if request.method == "POST" and 'rsvp' in request.POST:
+            form = RSVPForm(request.POST)
+            if form.is_valid():
+                student = form.cleaned_data['student']
+                # Create Attendance record for the RSVP.
+                attendance, created = Attendance.objects.get_or_create(student=student, event=event)
+                if created:
+                    return redirect('thank_you')
+                else:
+                    form.add_error(None, "You have already RSVPed for this event.")
+        else:
+            form = RSVPForm()
+
+    return render(request, 'event.html', {'event': event, 'form': form, 'form_type': form_type})
+
+
 
 def feedback(request, event_id):
     event = get_object_or_404(Event, id=event_id)
