@@ -4,6 +4,7 @@ from django.db.models import Count
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 from datetime import timedelta
+from django.core.paginator import Paginator
 
 from .models import Event, Club, Feedback, Attendance
 from .forms import CustomLoginForm, EventForm, FeedbackForm, RSVPForm
@@ -56,16 +57,25 @@ def login_view(request):
 
 
 def home(request):
+
+    #Number of events to show per page
+    PER_PAGE = 5
+
     today = now().date()
     four_weeks_ago = today - timedelta(weeks=4)
 
     clubs = Club.objects.order_by('name')
     
     # Fetch upcoming events (from today onwards)
-    events = Event.objects.filter(date__gte=today) \
+    events_queryset = Event.objects.filter(date__gte=today) \
         .select_related('club') \
         .annotate(attendee_count=Count('attendance')) \
         .order_by('date')
+    
+    # Paginate the upcoming events with 10 events per page
+    paginator = Paginator(events_queryset, 5)
+    page_number = request.GET.get('page')
+    events_page = paginator.get_page(page_number)
 
     # Fetch past events from the last 4 weeks (excluding today)
     past_events = Event.objects.filter(date__range=[four_weeks_ago, today - timedelta(days=1)]) \
@@ -75,7 +85,7 @@ def home(request):
 
     return render(request, 'home.html', {
         "user": request.user,
-        'events': events,
+        'events': events_page,  # Use the paginated results
         'past_events': past_events,
         'clubs': clubs
     })

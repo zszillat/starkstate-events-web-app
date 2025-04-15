@@ -7,28 +7,29 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <main>
   <div class="page-left">
-      <div class="feedback">
-        <h1>Leave Feedback</h1>
-        <div class="past-events">
-          {% for past_event in past_events %}
-          <div class="past-event" data-event-id="{{ past_event.id }}" style="cursor: pointer;">
-            <h2>{{ past_event.name }}</h2>
-            <p>{{ past_event.club.name }}</p>
-            <p>{{ past_event.date }}</p>
-          </div>
-          {% endfor %}
-
-          <script>
-            document.querySelectorAll('.past-event').forEach(function(element) {
-              element.addEventListener('click', function() {
-                const eventId = this.dataset.eventId;
-                window.location.href = "{% url 'leave_feedback' 0 %}".replace("0", eventId) + "#form";
-              });
-            });
-          </script>
+    <!-- Existing content for past events and feedback -->
+    <div class="feedback">
+      <h1>Leave Feedback</h1>
+      <div class="past-events">
+        {% for past_event in past_events %}
+        <div class="past-event" data-event-id="{{ past_event.id }}" style="cursor: pointer;">
+          <h2>{{ past_event.name }}</h2>
+          <p>{{ past_event.club.name }}</p>
+          <p>{{ past_event.date }}</p>
         </div>
+        {% endfor %}
+        <script>
+          document.querySelectorAll('.past-event').forEach(function(element) {
+            element.addEventListener('click', function() {
+              const eventId = this.dataset.eventId;
+              window.location.href = "{% url 'leave_feedback' 0 %}".replace("0", eventId) + "#form";
+            });
+          });
+        </script>
       </div>
     </div>
+  </div>
+  
   <div class="feed">
     {% for event in events %}
     <div class="event">
@@ -39,9 +40,7 @@
             <p class="event-title">{{ event.name }}</p>
           </div>
       </div>  
-
       <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
-
       <img src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="Event image" class="post-img">
       <div class="more-details-section">
         <p>{{ event.attendee_count }} Attending</p>
@@ -51,6 +50,17 @@
     {% empty %}
     <p>No upcoming events.</p>
     {% endfor %}
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      {% if events.has_previous %}
+        <a href="?page={{ events.previous_page_number }}">Previous</a>
+      {% endif %}
+      <span>Page {{ events.number }} of {{ events.paginator.num_pages }}</span>
+      {% if events.has_next %}
+        <a href="?page={{ events.next_page_number }}">Next</a>
+      {% endif %}
+    </div>
   </div>
 
   <div class="page-right">
@@ -66,5 +76,4 @@
     </div>
   </div>
 </main>
-
 {% endblock %}
