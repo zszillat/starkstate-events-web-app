@@ -1,19 +1,85 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Spartan Engage{% endblock %}
+{% block title %}Clubs - Spartan Engage{% endblock %}
+
+{% block css %}
+<style>
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .club-link {
+    display: block;
+    width: 200px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .club-link:hover {
+    transform: scale(1.02);
+  }
+
+  .club {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .club img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+  }
+
+  .club-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: #333;
+    text-align: center;
+    width: 100%;
+  }
+
+  .club-desc {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    width: 100%;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/clubs.css' %}">
 <main>
-    {% for club in clubs %}
-    <a class="club-link" href="{% url 'club' club.id %}">
-        <div class="club">
-            <img src="{{ club.pfp.url }}" alt="{{ club.name }} profile picture">
-            <div class="club-name">{{ club.name }}</div>
-            <p class="club-desc">{{ club.description }}</p>
-        </div>
-    </a>
-    {% endfor %}
+  {% for club in clubs %}
+  <a class="club-link" href="{% url 'club' club.id %}">
+    <div class="club">
+      <img src="{{ club.pfp.url }}" alt="{{ club.name }} profile picture">
+      <div class="club-name">{{ club.name }}</div>
+      <p class="club-desc">{{ club.description }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </main>
 {% endblock %}

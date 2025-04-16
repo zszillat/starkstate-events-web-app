@@ -1,27 +1,88 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Spartan Engage{% endblock %}
+{% block title %}Club - Spartan Engage{% endblock %}
+
+{% block css %}
+<style>
+  .club-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background-color: #f5f7fa;
+    min-height: 85vh;
+  }
+
+  .club-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .club-pfp {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: block;
+    border: 4px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .club-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1rem;
+  }
+
+  .club-quote {
+    font-style: italic;
+    color: #555;
+    background-color: #f0f0f5;
+    border-left: 4px solid #8ab4f8;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .club-meta {
+    font-size: 1rem;
+    color: #444;
+    text-align: left;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+  }
+
+  .club-meta a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .club-meta a:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/club.css' %}">
-
-<main class="club-container">
-    <div class="club-card">
-
-        <img class="club-pfp" src="{{ club.pfp.url }}" alt="{{ club.name }} profile picture">
-
-        <h1 class="club-title">{{ club.name }}</h1>
-
-        <blockquote class="club-quote">
-            {{ club.description }}
-        </blockquote>
-
-        <div class="club-meta">
-            <p><strong>Leader:</strong> {{ club.leader.first_name }} {{ club.leader.last_name }}</p>
-            <p><strong>Contact:</strong> <a href="mailto:{{ club.leader.email }}">{{ club.leader.email }}</a></p>
-        </div>
+<div class="club-container">
+  <div class="club-card">
+    <img class="club-pfp" src="{{ club.pfp.url }}" alt="{{ club.name }} logo">
+    <h1 class="club-title">{{ club.name }}</h1>
+    <p class="club-quote">“{{ club.quote }}”</p>
+    <div class="club-meta">
+      <p><strong>Category:</strong> {{ club.category }}</p>
+      <p><strong>Contact:</strong> <a href="mailto:{{ club.contact_email }}">{{ club.contact_email }}</a></p>
+      <p>{{ club.description }}</p>
     </div>
-</main>
+  </div>
+</div>
 {% endblock %}
-{% comment %} TODO Add Club's future and past events {% endcomment %}

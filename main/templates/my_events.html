@@ -1,40 +1,144 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Spartan Engage{% endblock %}
+{% block title %}My Events - Spartan Engage{% endblock %}
+
+{% block css %}
+<style>
+  main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: #1A2857;
+    margin-bottom: 1.5rem;
+  }
+
+  .edit-new-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1A2857;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .edit-new-button:hover {
+    background-color: #0f1b3f;
+  }
+
+  .edit-new-button p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .edit-new-button img {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+  }
+
+  .event {
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .event-details {
+    padding: 1rem;
+  }
+
+  .event-details h2 {
+    font-size: 18px;
+    color: #1A2857;
+    margin-bottom: 0.3rem;
+  }
+
+  .event-details p {
+    font-size: 14px;
+    color: #444;
+    margin: 0.25rem 0;
+  }
+
+  .event > div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #f0f0f0;
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .event > div:last-child a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #1A2857;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
+  }
+
+  .event > div:last-child a:hover {
+    background-color: #0f1b3f;
+  }
+
+  .event > div:last-child img {
+    width: 14px;
+    height: 14px;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/my_events.css' %}">
 <main>
-    <h1>My Events</h1> 
-    <a class="edit-new-button" href="{% url 'add_event' %}">
-        <p>New</p>
-        <img src="{% static 'images/new.svg' %}" alt="plus icon" class="edit-button">
-    </a>
-    {% for event in events %}
-    <div class="event">
-        <div class="event-details">
-            <h2>{{ event.name }}</h2>
-            <p>{{ event.date }} at {{ event.time }}</p>
-            <p>{{ event.description|truncatechars:100 }}</p>
-        </div>
-    
-        <div>
-            <a href="{% url 'edit_event' event.id %}">
-                <p>Edit</p>
-                <img src="{% static 'images/edit.svg' %}" alt="pencil icon" class="edit-button">
-            </a>
-    
-            <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Delete this event?');" style="margin-top: 0.5rem;">
-                {% csrf_token %}
-                <button type="submit" class="delete-button">
-                    <p>Delete</p>
-                    <img src="{% static 'images/delete.svg' %}" alt="trash icon" class="edit-button">
-                </button>
-            </form>
-        </div>
-    </div>    
-    {% endfor %}
+  <h1>My Events</h1>
+  <a class="edit-new-button" href="{% url 'add_event' %}">
+    <p>New</p>
+    <img src="{% static 'images/new.svg' %}" alt="plus icon" class="edit-button">
+  </a>
+  {% for event in events %}
+  <div class="event">
+    <div class="event-details">
+      <h2>{{ event.name }}</h2>
+      <p>{{ event.date }} at {{ event.time }}</p>
+      <p>{{ event.description|truncatechars:100 }}</p>
+    </div>
+    <div>
+      <a href="{% url 'edit_event' event.id %}">
+        <p>Edit</p>
+        <img src="{% static 'images/edit.svg' %}" alt="pencil icon" class="edit-button">
+      </a>
+      <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Delete this event?');" style="margin-top: 0.5rem;">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">
+          <p>Delete</p>
+          <img src="{% static 'images/delete.svg' %}" alt="trash icon" class="edit-button">
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
 </main>
 <script src="{% static 'js/myevents.js' %}"></script>
 {% endblock %}

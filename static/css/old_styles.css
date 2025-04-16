@@ -65,7 +65,7 @@ header {
   color: #666;
 }
 
-/* ========== Navigation - Desktop ========== */
+/* ========== Desktop Navigation ========== */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -94,14 +94,12 @@ header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* ========== Navigation - Mobile Toggle ========== */
+/* ========== Mobile Navigation Toggle ========== */
 .menu {
   display: none;
 }
 
 @media (max-width: 768px) {
-
-/* ========== Header ========== */
   .header-wrapper {
     width: 100%;
     margin-bottom: 0.5rem;
@@ -111,8 +109,6 @@ header {
     display: none;
   }
 
-
-/* ========== Navigation - Mobile Toggle ========== */
   .menu {
     display: flex;
     position: absolute;
@@ -125,14 +121,10 @@ header {
     width: 60px;
   }
 
-
-/* ========== Navigation - Desktop ========== */
   .desktop-nav {
     display: none;
   }
 
-
-/* ========== Navigation - Mobile & Animation ========== */
   .mobile-nav {
     display: none;
     flex-direction: column;
@@ -156,6 +148,7 @@ header {
   }
 }
 
+/* ========== Mobile Navigation Animation ========== */
 .mobile-nav {
   background-color: #ffffff;
   width: 100%;
@@ -166,8 +159,6 @@ header {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-
-/* ========== Forms ========== */
   transform: translateY(-10px);
   pointer-events: none;
   transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
@@ -178,8 +169,6 @@ header {
 .mobile-nav.show {
   max-height: 500px;
   opacity: 1;
-
-/* ========== Forms ========== */
   transform: translateY(0);
   pointer-events: all;
 
@@ -241,7 +230,7 @@ label {
   font-weight: bold;
 }
 
-/* ========== Layout ========== */
+/* ========== Shared Layout ========== */
 .event-container {
   max-width: 600px;
   margin: 3rem auto;
@@ -251,7 +240,6 @@ label {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* ========== Forms ========== */
 .event-form {
   display: flex;
   flex-direction: column;
@@ -270,7 +258,7 @@ label {
   margin-bottom: 0.25rem;
 }
 
-/* ========== Forms ========== */
+/* ========== Enhanced Field Focus ========== */
 input:focus,
 textarea:focus,
 select:focus {

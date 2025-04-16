@@ -1,44 +1,42 @@
 {% load static %}
 <header>
-    <div class="header-wrapper">
-        <img src="{% static 'images/stark-state-logo.png' %}" alt="Stark State Logo">
-        <div class="header-text-wrapper">
-            <h1>Spartan Engage</h1>
-            <p>Stark State College</p>
-        </div>
+  <div class="header-wrapper">
+    <img src="{% static 'images/stark-state-logo.png' %}" alt="Stark State Logo">
+    <div class="header-text-wrapper">
+      <h1>Spartan Engage</h1>
+      <p>Stark State College</p>
     </div>
+  </div>
 
-    <div class="menu">
-        <img src="{% static 'images/hamburger.svg' %}" alt="Menu Icon Button" id="menuToggleButton">
-    </div>
+  <div class="menu">
+    <img src="{% static 'images/hamburger.svg' %}" alt="Menu Icon Button" id="menuToggleButton">
+  </div>
 
-    <div class="desktop-nav">
-        {% if user.is_authenticated %}
-            <p>Welcome, {{ user.username }}!</p>
-            <a class="{% if request.path == '/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'home' %}">Home</a>
-            <a class="{% if request.path == '/myevents/' or request.path == '/myevents/add/' or request.path|slice:':13' == '/myevents/edit/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'my_events' %}">My Events</a>
-            <a class="{% if request.path == '/clubs/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'clubs' %}">Clubs</a>
-            <a class="desktop-nav-link" href="{% url 'logout' %}">Logout</a>
-        {% else %}
-            <a class="{% if request.path == '/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'home' %}">Home</a>
-            <a class="desktop-nav-link {% if request.path == '/clubs/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'clubs' %}">Clubs</a>
-            <a class="{% if request.path == '/login/' %}active{% else %}desktop-nav-link{% endif %}" href="{% url 'login' %}">Login</a>
-        {% endif %}
-
-    </div>
-
+  <div class="desktop-nav">
+    {% if user.is_authenticated %}
+      <p>Welcome, {{ user.username }}!</p>
+      <a class="{% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+      <a class="{% if request.path == '/myevents/' or request.path == '/myevents/add/' or request.path|slice:':13' == '/myevents/edit/' %}active{% endif %}" href="{% url 'my_events' %}">My Events</a>
+      <a class="{% if request.path == '/clubs/' %}active{% endif %}" href="{% url 'clubs' %}">Clubs</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a class="{% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+      <a class="{% if request.path == '/clubs/' %}active{% endif %}" href="{% url 'clubs' %}">Clubs</a>
+      <a class="{% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
 </header>
 
 <div class="mobile-nav" id="mobileMenu">
-    {% if user.is_authenticated %}
+  {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}!</p>
     <a class="mobile-nav-link" href="{% url 'home' %}">Home</a>
     <a class="mobile-nav-link" href="{% url 'my_events' %}">My Events</a>
     <a class="mobile-nav-link" href="{% url 'clubs' %}">Clubs</a>
     <a class="mobile-nav-link" href="{% url 'logout' %}">Logout</a>
-    {% else %}
+  {% else %}
     <a class="mobile-nav-link" href="{% url 'home' %}">Home</a>
     <a class="mobile-nav-link" href="{% url 'clubs' %}">Clubs</a>
     <a class="mobile-nav-link" href="{% url 'login' %}">Login</a>
-    {% endif %}
+  {% endif %}
 </div>
