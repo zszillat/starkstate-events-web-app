@@ -170,7 +170,12 @@ def feedback_landing(request):
     past_events = Event.objects.filter(date__gte=six_months_ago, date__lt=now().date()) \
                                .select_related('club') \
                                .order_by('-date')
-    return render(request, 'feedback.html', {'events': past_events})
+
+    paginator = Paginator(past_events, 18)  # Show 5 events per page
+    page_number = request.GET.get('page')
+    events = paginator.get_page(page_number)
+
+    return render(request, 'feedback.html', {'events': events})
 
 def clubs(request):
     clubs_list = Club.objects.order_by('name')

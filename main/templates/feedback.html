@@ -3,7 +3,7 @@
 
 {% block content %}
   <main>
-    <h2>Past Events (Last 6 Months)</h2>
+    <h2>Past Events</h2>
     {% if events %}
       <div class="event-container">
         {% for event in events %}
@@ -14,10 +14,20 @@
               <strong>Club:</strong> {{ event.club.name }}
             </p>
             <a href="{% url 'event_details' event.id %}" class="btn-submit" style="margin-top: 0.75rem; display: inline-block;">
-              View Feedback / Submit
+              Submit Feedback
             </a>
           </div>
         {% endfor %}
+      </div>
+
+      <div class="pagination" style="margin: 20px 0; font-size: 14px;">
+        {% if events.has_previous %}
+          <a href="?page={{ events.previous_page_number }}" style="margin-right: 8px;">Previous</a>
+        {% endif %}
+        <span>Page {{ events.number }} of {{ events.paginator.num_pages }}</span>
+        {% if events.has_next %}
+          <a href="?page={{ events.next_page_number }}" style="margin-left: 8px;">Next</a>
+        {% endif %}
       </div>
     {% else %}
       <p>No events from the past 6 months found.</p>
