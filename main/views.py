@@ -152,29 +152,6 @@ def event(request, event_id):
     return render(request, 'event.html', {'event': event_obj, 'form': form, 'form_type': form_type})
 
 
-def feedback(request, event_id):
-    event_obj = get_object_or_404(Event, id=event_id)
-
-    if request.method == 'POST':
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            student = form.cleaned_data['student']
-            feedback_text = form.cleaned_data['feedback']
-            feedback_obj, created = Feedback.objects.get_or_create(
-                student=student,
-                event=event_obj,
-                defaults={'feedback': feedback_text}
-            )
-            if not created:
-                form.add_error(None, "You’ve already submitted feedback for this event.")
-            else:
-                return redirect('thank_you')
-    else:
-        form = FeedbackForm()
-
-    return render(request, 'feedback.html', {'form': form, 'event': event_obj})
-
-
 def thanks(request):
     return render(request, 'thanks.html')
 
@@ -185,8 +162,15 @@ def new(request):
 
 def club(request, club_id):
     club_obj = get_object_or_404(Club, id=club_id)
-    return render(request, 'club.html', {'club': club_obj})
+    upcoming_events = Event.objects.filter(club=club_obj, date__gte=now().date()).order_by('date')
+    return render(request, 'club.html', {'club': club_obj, 'upcoming_events': upcoming_events})
 
+def feedback_landing(request):
+    six_months_ago = now().date() - timedelta(days=180)
+    past_events = Event.objects.filter(date__gte=six_months_ago, date__lt=now().date()) \
+                               .select_related('club') \
+                               .order_by('-date')
+    return render(request, 'feedback.html', {'events': past_events})
 
 def clubs(request):
     clubs_list = Club.objects.order_by('name')

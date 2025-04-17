@@ -69,6 +69,37 @@
   .club-meta a:hover {
     text-decoration: underline;
   }
+
+  .events-section {
+    margin-top: 2rem;
+    text-align: left;
+  }
+
+  .events-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .event-item {
+    background-color: #f9f9fc;
+    border: 1px solid #e2e2e2;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .event-item strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #222;
+  }
+
+  .event-item small {
+    color: #666;
+  }
 </style>
 {% endblock %}
 
@@ -79,10 +110,33 @@
     <h1 class="club-title">{{ club.name }}</h1>
     <p class="club-quote">“{{ club.quote }}”</p>
     <div class="club-meta">
-      <p><strong>Category:</strong> {{ club.category }}</p>
-      <p><strong>Contact:</strong> <a href="mailto:{{ club.contact_email }}">{{ club.contact_email }}</a></p>
+      <p><strong>Contact:</strong>
+        {% if club.leader %}
+          {{ club.leader.first_name }} {{ club.leader.last_name }} - 
+          <a href="mailto:{{ club.leader.email }}">{{ club.leader.email }}</a>
+        {% else %}
+          Not available
+        {% endif %}
+      </p>
       <p>{{ club.description }}</p>
     </div>
+
+    {% if upcoming_events %}
+    <div class="events-section">
+      <h2>Upcoming Events</h2>
+      {% for event in upcoming_events %}
+      <div class="event-item">
+        <strong>
+          <a href="/event/{{ event.id }}">
+            {{ event.name }}
+          </a>
+        </strong>
+        <small>{{ event.date }} at {{ event.time|time:"g:i A" }}</small>
+        <p>{{ event.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

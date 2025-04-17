@@ -9,7 +9,7 @@ sys.path.append(project_root)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "starkstate_events_web_app.settings")
 django.setup()
 
-from main.models import Attendance, Event, Student  # Replace 'main' with your app name
+from main.models import Attendance, Event, Student
 
 def load_attendance_from_csv(csv_path="dummy_data/event_attendance.csv"):
     print(f"📂 Importing attendance from {csv_path}")

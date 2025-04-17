@@ -1,140 +1,26 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Event Feedback - Spartan Engage{% endblock %}
-
-{% block css %}
-<style>
-  main {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
-
-  .event {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .title-box {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 1rem;
-  }
-
-  .student-org-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-  }
-
-  .event-title-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .club-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #0073e6;
-    margin: 0;
-  }
-
-  .event-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0.25rem 0 0 0;
-  }
-
-  .event-time {
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: #555;
-  }
-
-  .post-img {
-    width: 100%;
-    height: auto;
-    margin: 1rem 0;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  .more-details-section {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #444;
-  }
-
-  .more-details-section p {
-    margin-bottom: 0.5rem;
-  }
-
-  .more-details-section a {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding: 0.5rem 1rem;
-    background-color: #0073e6;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease-in-out;
-  }
-
-  .more-details-section a:hover {
-    background-color: #005bb5;
-  }
-
-  h2 {
-    margin-top: 2rem;
-    font-size: 1.3rem;
-    color: #222;
-  }
-
-  form {
-    margin-top: 2rem;
-    max-width: 600px;
-  }
-</style>
-{% endblock %}
+{% block title %}Event Feedback{% endblock %}
 
 {% block content %}
-<main>
-  <div class="event">
-    <div class="title-box">
-      <img src="{{ event.club.pfp.url }}" alt="" class="student-org-img">
-      <div class="event-title-wrapper">
-        <p class="club-title">{{ event.club.name }}</p>
-        <p class="event-title">{{ event.name }}</p>
+  <main>
+    <h2>Past Events (Last 6 Months)</h2>
+    {% if events %}
+      <div class="event-container">
+        {% for event in events %}
+          <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #ccc;">
+            <h3 style="margin-bottom: 0.25rem;">{{ event.name }}</h3>
+            <p style="margin: 0; color: #555;">
+              <strong>Date:</strong> {{ event.date }} |
+              <strong>Club:</strong> {{ event.club.name }}
+            </p>
+            <a href="{% url 'event_details' event.id %}" class="btn-submit" style="margin-top: 0.75rem; display: inline-block;">
+              View Feedback / Submit
+            </a>
+          </div>
+        {% endfor %}
       </div>
-    </div>  
-    <div class="event-time">
-      <p>{{ event.date }} {{ event.time }}</p>
-    </div>
-    <img src="{{ event.image.url }}" alt="" class="post-img">
-    <div class="more-details-section">
-      <p>{{ event.attendee_count }} Attending</p>
-      <p>{{ event.description }}</p>
-      {% if is_past %}
-      <a href="{% url 'leave_feedback' event.id %}">Leave Feedback</a>
-      {% endif %}
-    </div>
-  </div>
-
-  <h2>Submit Feedback for {{ event.name }}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-  </form>
-</main>
+    {% else %}
+      <p>No events from the past 6 months found.</p>
+    {% endif %}
+  </main>
 {% endblock %}

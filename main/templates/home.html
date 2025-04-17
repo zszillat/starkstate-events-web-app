@@ -3,9 +3,11 @@
 
 {% block title %}Home - Spartan Engage{% endblock %}
 
+{# ==================== CSS ==================== #}
 {% block css %}
 <style>
-  .page-left, .page-right {
+  .page-left,
+  .page-right {
     display: none;
   }
 
@@ -17,63 +19,71 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: stretch;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
   }
 
+  /* ---- Event Card ---- */
   .event {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     margin: 10px 0;
-    background-color: white;
+    background: #fff;
   }
 
+  /* -- Title box grows with wrapped text -- */
   .title-box {
     display: flex;
-    height: 90px;
-    justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
     border-radius: 10px 10px 0 0;
-  }
-
-  .event-title-wrapper {
-    height: 100%;
-  }
-
-  .event-title {
-    font-size: 16px;
-    width: 95%;
-    margin-top: 5px;
-    margin-left: 8px;
+    gap: 10px;
   }
 
   .student-org-img {
-    height: 70%;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
     border-radius: 50%;
-    margin-left: 10px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-    border: 1px rgb(251, 251, 251) solid;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px #fbfbfb solid;
+  }
+
+  .event-title-wrapper {
+    flex: 1;
+    min-width: 0;
   }
 
   .club-title {
     font-weight: 900;
     font-size: 13px;
-    width: 95%;
-    margin-top: 8px;
-    margin-left: 8px;
+    margin: 0 0 4px 0;
+    word-wrap: break-word;
+  }
+
+  .event-title {
+    font-size: 16px;
+    margin: 0;
+    overflow-wrap: anywhere;
+    display: block;
+    line-height: 1.4;
   }
 
   .event-time {
-    background-color: #1A2857;
-    color: white;
+    background: #1A2857;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 25px;
+    width: 100%;
   }
 
   .post-img {
@@ -85,208 +95,92 @@
   .more-details-section {
     height: 65px;
     display: flex;
-    border-radius: 0 0 10px 10px;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 0 0 10px 10px;
   }
 
-  .more-details-section > * {
-    margin: 0 10px;
-  }
-
-  .more-details-section > button,
   .more-details-section > a {
-    background-color: #1A2857;
-    color: white;
+    background: #1A2857;
+    color: #fff;
     padding: 10px;
-    border: none;
     font-size: 10px;
+    text-decoration: none;
+    border: none;
+  }
+
+  /* ---- Pagination ---- */
+  .pagination {
+    margin: 20px 0;
+    font-size: 14px;
+  }
+
+  .pagination a {
+    margin: 0 8px;
+    color: #0277C8;
     text-decoration: none;
   }
 
+  .pagination a:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Desktop Layout ---- */
   @media (min-width: 850px) {
-    .page-left {
-      display: flex;
-      flex: 2;
-      justify-content: center;
-      align-items: baseline;
-    }
-
-    .page-right {
-      display: flex;
-      flex: 2;
-      justify-content: center;
-      align-items: baseline;
-    }
-
     main {
       display: flex;
       width: 100%;
     }
 
     .feed {
-      flex: 5;
+      flex: 1;
     }
+  }
 
-    .event {
-      width: 100%;
-    }
-
-    .clubs {
-      background-color: white;
-      margin-top: 30px;
-      height: auto;
-      width: 85%;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-      border: 1px solid #0277C8;
-    }
-
-    .clubs h1 {
-      width: 100%;
-      height: 35px;
-      text-align: center;
-      font-size: 15px;
-      color: white;
-      background-color: #0277C8;
-      line-height: 35px;
-    }
-
-    .club-list {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      padding: 0 0 45px 0;
-    }
-
-    .club-list a {
-      padding: 6px 0;
-      text-decoration: none;
-      padding-left: 15px;
-      transition: background-color 0.1s ease, color 0.1s ease, transform 0.5s ease, box-shadow 0.5s ease;
-      transform: translateZ(0);
-      color: black;
-      border-top: rgb(216, 216, 216) 1px solid;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .club-list a:hover {
-      background-color: #0277C8;
-      color: white;
-      transform: scale(1.0025) translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .feedback {
-      background-color: white;
-      width: 85%;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      margin-top: 30px;
-      padding-top: 12px;
-    }
-
-    .feedback h1 {
-      font-size: 15px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .past-event {
-      padding: 5px 9px;
-      border-top: rgb(236, 236, 236) 0.5px solid;
-      border-bottom: rgb(236, 236, 236) 0.5px solid;
-    }
-
-    .past-event:hover {
-      cursor: grab;
-      background-color: rgb(230, 230, 230);
-    }
-
-    .past-event h2 {
-      font-size: 10px;
-    }
-
-    .past-event p {
-      font-size: 9px;
-      color: grey;
+  /* ---- Mobile Padding ---- */
+  @media (max-width: 600px) {
+    .feed {
+      padding: 0 12px;
     }
   }
 </style>
 {% endblock %}
 
+{# ==================== CONTENT ==================== #}
 {% block content %}
 <main>
-  <div class="page-left">
-    <div class="feedback">
-      <h1>Leave Feedback</h1>
-      <div class="past-events">
-        {% for past_event in past_events %}
-        <div class="past-event" data-event-id="{{ past_event.id }}" style="cursor: pointer;">
-          <h2>{{ past_event.name }}</h2>
-          <p>{{ past_event.club.name }}</p>
-          <p>{{ past_event.date }}</p>
-        </div>
-        {% endfor %}
-        <script>
-          document.querySelectorAll('.past-event').forEach(function(element) {
-            element.addEventListener('click', function() {
-              const eventId = this.dataset.eventId;
-              window.location.href = "{% url 'leave_feedback' 0 %}".replace("0", eventId) + "#form";
-            });
-          });
-        </script>
-      </div>
-    </div>
-  </div>
+  <div class="page-left"></div>
 
   <div class="feed">
     {% for event in events %}
-    <div class="event">
-      <div class="title-box">
-        <img src="{{ event.club.pfp.url }}" alt="alt-text" class="student-org-img">
-        <div class="event-title-wrapper">
-          <p class="club-title">{{ event.club.name }}</p>
-          <p class="event-title">{{ event.name }}</p>
+      <div class="event">
+        <div class="title-box">
+          <img src="{{ event.club.pfp.url }}" alt="{{ event.club.name }} logo" class="student-org-img">
+          <div class="event-title-wrapper">
+            <p class="club-title">{{ event.club.name }}</p>
+            <p class="event-title">{{ event.name }}</p>
+          </div>
+        </div>
+        <div class="event-time"><p>{{ event.date }} {{ event.time }}</p></div>
+        <img src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="Event image" class="post-img">
+        <div class="more-details-section">
+          <p>{{ event.attendee_count }} Attending</p>
+          <a href="{% url 'event_details' event.id %}">More Details</a>
         </div>
       </div>
-      <div class="event-time">
-        <p>{{ event.date }} {{ event.time }}</p>
-      </div>
-      <img src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" alt="Event image" class="post-img">
-      <div class="more-details-section">
-        <p>{{ event.attendee_count }} Attending</p>
-        <a href="{% url 'event_details' event.id %}">More Details</a>
-      </div>
-    </div>
     {% empty %}
-    <p>No upcoming events.</p>
+      <p>No upcoming events.</p>
     {% endfor %}
 
     <div class="pagination">
-      {% if events.has_previous %}
-      <a href="?page={{ events.previous_page_number }}">Previous</a>
-      {% endif %}
+      {% if events.has_previous %}<a href="?page={{ events.previous_page_number }}">Previous</a>{% endif %}
       <span>Page {{ events.number }} of {{ events.paginator.num_pages }}</span>
-      {% if events.has_next %}
-      <a href="?page={{ events.next_page_number }}">Next</a>
-      {% endif %}
+      {% if events.has_next %}<a href="?page={{ events.next_page_number }}">Next</a>{% endif %}
     </div>
   </div>
 
-  <div class="page-right">
-    <div class="clubs">
-      <h1>Student Organizations</h1>
-      <div class="club-list">
-        {% for club in clubs %}
-        <a href="{% url 'club' club.id %}">{{ club.name }}</a>
-        {% empty %}
-        <a>No clubs yet</a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+  <div class="page-right"></div>
 </main>
 {% endblock %}
