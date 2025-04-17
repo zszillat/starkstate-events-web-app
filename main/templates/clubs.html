@@ -11,13 +11,14 @@
     gap: 1rem;
     padding: 1rem;
     justify-content: center;
-    width: 80%;
+    width: calc(100% - 2rem); /* Full width minus padding */
+    box-sizing: border-box;
     margin: 0 auto;
   }
 
   .club-link {
-    display: block;
-    width: 200px;
+    flex: 1 1 250px; /* Grow/Shrink but never smaller than 250px */
+    max-width: 400px; /* Optional: prevents cards from getting too wide */
     background-color: #f9f9f9;
     border-radius: 12px;
     padding: 1rem;
@@ -26,6 +27,7 @@
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s ease;
+    box-sizing: border-box;
   }
 
   .club-link:hover {
@@ -64,7 +66,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 180px;
     width: 100%;
   }
 </style>
