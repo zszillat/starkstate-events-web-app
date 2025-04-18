@@ -5,18 +5,12 @@
 
 {% block css %}
 <style>
-  main {
+  .edit-new-button-wrapper {
     width: 100%;
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    color: #1A2857;
-    margin-bottom: 1.5rem;
+    justify-content: flex-end;
   }
 
   .edit-new-button {
@@ -28,19 +22,14 @@
     padding: 8px 14px;
     border-radius: 8px;
     text-decoration: none;
-    margin-bottom: 1.5rem;
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight: bold;
   }
 
   .edit-new-button:hover {
     background-color: #0f1b3f;
-  }
-
-  .edit-new-button p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: bold;
   }
 
   .edit-new-button img {
@@ -50,18 +39,21 @@
   }
 
   .event {
-    width: 90%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
-    margin: 10px 0;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
+    max-width: 700px;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
   .event-details {
-    padding: 1rem;
+    padding-bottom: 0.5rem;
   }
 
   .event-details h2 {
@@ -80,32 +72,43 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0.75rem 1rem;
-    background-color: #f0f0f0;
+    padding-top: 0.75rem;
     border-top: 1px solid #e0e0e0;
-    border-radius: 0 0 10px 10px;
   }
 
-  .event > div:last-child a {
+  .button-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+  }
+
+  .button-group a {
     background-color: #1A2857;
     color: white;
     padding: 6px 12px;
+    font-size: 13px;
+    font-weight: bold;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 13px;
+    line-height: 1;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.2s ease;
   }
 
-  .event > div:last-child a:hover {
+  .button-group a:hover {
     background-color: #0f1b3f;
   }
 
-  .event > div:last-child img {
-    width: 14px;
-    height: 14px;
+  .button-group form {
+    margin: 0;
+  }
+
+  .button-group .btn-delete {
+    height: 36px;
+    margin: 0;
   }
 </style>
 {% endblock %}
@@ -113,10 +116,13 @@
 {% block content %}
 <main>
   <h1>My Events</h1>
-  <a class="edit-new-button" href="{% url 'add_event' %}">
-    <p>New</p>
-    <img src="{% static 'images/new.svg' %}" alt="plus icon" class="edit-button">
-  </a>
+  <div class="edit-new-button-wrapper">
+    <a class="edit-new-button" href="{% url 'add_event' %}">
+      New
+      <img src="{% static 'images/new.svg' %}" alt="plus icon" class="edit-button">
+    </a>
+  </div>
+
   {% for event in events %}
   <div class="event">
     <div class="event-details">
@@ -125,17 +131,13 @@
       <p>{{ event.description|truncatechars:100 }}</p>
     </div>
     <div>
-      <a href="{% url 'edit_event' event.id %}">
-        <p>Edit</p>
-        <img src="{% static 'images/edit.svg' %}" alt="pencil icon" class="edit-button">
-      </a>
-      <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Delete this event?');" style="margin-top: 0.5rem;">
-        {% csrf_token %}
-        <button type="submit" class="delete-button">
-          <p>Delete</p>
-          <img src="{% static 'images/delete.svg' %}" alt="trash icon" class="edit-button">
-        </button>
-      </form>
+      <div class="button-group">
+        <a href="{% url 'edit_event' event.id %}">Edit</a>
+        <form method="post" action="{% url 'delete_event' event.id %}" onsubmit="return confirm('Delete this event?');">
+          {% csrf_token %}
+          <button type="submit" class="btn-delete">Delete</button>
+        </form>
+      </div>
     </div>
   </div>
   {% endfor %}
