@@ -18,7 +18,6 @@ def logout_view(request):
 def add_event(request):
     user = request.user
 
-    # Try to retrieve the club associated with the user
     try:
         club = user.club
     except Club.DoesNotExist:
@@ -31,7 +30,7 @@ def add_event(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
-            event.club = club  # Link the event to the user's club
+            event.club = club
             event.save()
             return redirect('my_events')
     else:
@@ -53,18 +52,14 @@ def login_view(request):
     else:
         form = CustomLoginForm()
 
-    return render(request, "login.html", {"form": form, "user": request.user})
+    return render(request, "login.html", {"form": form})
 
-# Displays the homepage with upcoming and recent past events
+# Displays the homepage with upcoming events
 def home(request):
-    PER_PAGE = 5  # Events per page
+    PER_PAGE = 5
 
     today = now().date()
-    four_weeks_ago = today - timedelta(weeks=4)
 
-    clubs = Club.objects.order_by('name')
-
-    # Get upcoming events
     events_queryset = Event.objects.filter(date__gte=today) \
         .select_related('club') \
         .annotate(attendee_count=Count('attendance')) \
@@ -74,17 +69,8 @@ def home(request):
     page_number = request.GET.get('page')
     events_page = paginator.get_page(page_number)
 
-    # Get recent past events (last 4 weeks)
-    past_events = Event.objects.filter(date__range=[four_weeks_ago, today - timedelta(days=1)]) \
-        .select_related('club') \
-        .annotate(attendee_count=Count('attendance')) \
-        .order_by('date')[:10]
-
     return render(request, 'home.html', {
-        "user": request.user,
-        'events': events_page,
-        'past_events': past_events,
-        'clubs': clubs
+        'events': events_page
     })
 
 # Lists events created by the logged-in user's clubs
@@ -113,7 +99,6 @@ def event(request, event_id):
     event_obj = get_object_or_404(Event, id=event_id)
     today = now().date()
 
-    # Show FeedbackForm for past events
     if event_obj.date < today:
         form_type = "feedback"
         if request.method == "POST" and 'feedback' in request.POST:
@@ -133,7 +118,6 @@ def event(request, event_id):
         else:
             form = FeedbackForm()
     else:
-        # Show RSVPForm for upcoming events
         form_type = "rsvp"
         if request.method == "POST" and 'rsvp' in request.POST:
             form = RSVPForm(request.POST)
