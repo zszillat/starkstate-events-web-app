@@ -117,25 +117,25 @@ In the Admin Panel:
 
 # Production Deployment
 
-## 1. Production Prerequisites
+## Production Prerequisites
 - **Server OS**: Ubuntu 20.04+
 - **Virtual Environment Tool**: `venv` or `virtualenv`  
 - **Web Server**: Nginx  
 - **Application Server**: Gunicorn  
 - **Database**: Any but MySQL is recommended
 
-## 2. Environment Variables
+## Environment Variables
 Create a `.env` file in the project root (or configure on your hosting platform):
 ```
 DJANGO_SECRET_KEY=<your-production-secret-key>
 DJANGO_SETTINGS_MODULE=starkstate_events_web_app.settings
-DATABASE_URL=mysql://remote:4797@PUBLIC_IP:3306/your_db_name
+DATABASE_URL=mysql://remote:4797@127.0.0.1:3306/your_db_name
 DEBUG=False
 ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ```
 Install `python-dotenv` to load these variables.
 
-## 3. Static & Media Files
+## Static & Media Files
 Update `settings.py`:
 ```python
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -147,7 +147,7 @@ python manage.py collectstatic --noinput
 ```
 Configure Nginx to serve `/static/` and `/media/` directories directly.
 
-## 4. Gunicorn Configuration
+## Gunicorn Configuration
 Install Gunicorn in your virtual environment:
 ```
 pip install gunicorn
@@ -175,7 +175,7 @@ sudo systemctl enable gunicorn
 sudo systemctl start gunicorn
 ```
 
-## 5. Nginx Configuration
+## Nginx Configuration
 Create `/etc/nginx/sites-available/yourproject`:
 ```
 server {
@@ -204,7 +204,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-## 7. Database Migrations & Superuser
+## Database Migrations & Superuser
 On the production server:
 ```
 source /path/to/venv/bin/activate
@@ -213,4 +213,28 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-This will let you setup an admin user.
+This will get the database schema setup and let you setup an admin user.
+
+# Dashboard Setup
+To connect your Power BI file (`Dashboard.pbix`) to the production database, follow these steps:
+
+1. **Open the Power BI file**  
+   Launch Power BI Desktop and open `Dashboard.pbix`.
+
+2. **Get Data from Database**  
+   - On the Home ribbon, click **Get Data** > **More...**  
+   - Choose **MySQL database** (for MySQL) and click **Connect**.
+
+3. **Enter Connection Details**  
+   - **Server:** `127.0.0.1` (or your production host)  
+   - **Database:** `your_db_name`  
+   - **Port:** `3306` MySQL Port 
+   - **Data Connectivity mode:**  
+     - *Import* (loads data into Power BI)  
+     - *DirectQuery* (live queries; no data import)  
+
+4. **Authentication**  
+   - **Authentication method:**  
+     - *Database* (SQL Server) or *Basic* (MySQL)  
+   - **Username:** `user`  
+   - **Password:** `password`
